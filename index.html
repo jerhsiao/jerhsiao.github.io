@@ -814,10 +814,9 @@
             <h3 class="education-title">Stanford University</h3>
             <div class="education-degree">BA in Communications, Double Minors in Computer Science and Music | GPA: 3.7</div>
             <div class="education-period">Graduated June 2025 (Conferring Degree Fall 2025)</div>
-            <p class="education-description">
-                Interdisciplinary courses in technology, media, and human communication. Hover over the courses to see relevant skills.
+            <p>
+                <span style="color: var(--text-primary); font-weight: bold;">Hover over courses to see relevant skills.</span>
             </p>
-            
             <div class="education-content-grid">
                 <div class="coursework-section">
                     <p class="section-label">Relevant Coursework:</p>
@@ -1024,7 +1023,7 @@
                 </p>
                 <a href="https://drive.google.com/file/d/1EPIf4qyYpDzVc6xzt2MG9k8rWqLERjbr/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="link-button">Documentation →</a>
             </div>
-            
+
             <div class="additional-project">
                 <p class="tech-stack">Qiskit, ChucK, Quantum Computing</p>
                 <h4 class="project-title">Quantum Generated Harmonics</h4>
@@ -1406,6 +1405,17 @@
                     current = section.getAttribute('id');
                 }
             });
+            const contactSection = document.querySelector('#contact');
+            if (contactSection) {
+                const contactTop = contactSection.getBoundingClientRect().top + window.scrollY;
+                const documentHeight = document.documentElement.scrollHeight;
+                const windowHeight = window.innerHeight;
+                const scrollBottom = window.scrollY + windowHeight;
+                
+                if (scrollBottom >= documentHeight - 200 || scrollPosition >= contactTop) {
+                    current = 'contact';
+                }
+            }
             
             if (window.scrollY < 100) {
                 current = '';
