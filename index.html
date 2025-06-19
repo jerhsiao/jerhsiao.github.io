@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremy Hsiao - Digital Artist & Researcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --tertiary-black: #2a2a2a;
+            --accent-orange: #ff6b35;
+            --accent-blue: #9eceff;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-black);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .course-tooltip {
+            position: fixed;
+            background: linear-gradient(135deg, var(--secondary-black) 0%, var(--tertiary-black) 100%);
+            border: 1px solid var(--accent-orange);
+            border-radius: 15px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            max-width: 320px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: tooltipFadeIn 0.2s ease-out;
+            padding: 0;
+        }
+
+        @keyframes tooltipFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .tooltip-content {
+            padding: 16px 18px;
+        }
+
+        .tooltip-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            line-height: 1.3;
+            border-bottom: 1px solid var(--tertiary-black);
+            padding-bottom: 8px;
+        }
+
+        .tooltip-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .tooltip-skill {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0091cc 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            line-height: 1.2;
+            box-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
+        }
+
+        .tooltip-description {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.6s both;
+        }
+
+        .profile-placeholder {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--tertiary-black), var(--secondary-black));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .profile-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .nav {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 20px;
+            border: 1px solid var(--tertiary-black);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-orange);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--accent-orange);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .section {
+            padding: 120px 5% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+        }
+
+        .education-card {
+            background: var(--secondary-black);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--tertiary-black);
+            margin-bottom: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .education-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-degree {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .education-period {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .education-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 2rem;
+        }
+
+        .section-label {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-orange);
+            font-size: 1rem;
+        }
+
+        .coursework-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .course-tag {
+            background: var(--tertiary-black);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--tertiary-black);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .course-tag:hover {
+            border-color: var(--accent-orange);
+            background: rgba(255, 107, 53, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+        }
+
+        .skills-compact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(255, 107, 53, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .skill-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .skill-category-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--accent-orange);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-items {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .research-card {
+            background: var(--secondary-black);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--tertiary-black);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .research-card:hover::before {
+            left: 100%;
+        }
+
+        .research-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .research-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+        }
+
+        .research-subtitle, .period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .research-description, .text-content {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .research-links, .button-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .research-link, .link-button {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid var(--accent-blue);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .research-link:hover, .link-button:hover {
+            background: var(--accent-blue);
+            color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .project-card {
+            background: var(--secondary-black);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--tertiary-black);
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .project-video, .video-container iframe {
+            width: 100%;
+            height: 250px;
+            background: var(--tertiary-black);
+            border: none;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 300;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .work-experience-item, .activity-item {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--tertiary-black);
+        }
+
+        .work-experience-item:last-child, .activity-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .work-header, .activity-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .work-title, .activity-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin: 0;
+        }
+
+        .work-location, .activity-location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .work-period, .activity-period {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+
+        .awards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .award-item {
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--tertiary-black);
+        }
+
+        .award-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .award-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 8px;
+        }
+
+        .award-description {
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .additional-project {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--tertiary-black);
+        }
+
+        .additional-project:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .card {
+            background: var(--secondary-black);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--tertiary-black);
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .subsection-title, .highlight-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--secondary-black);
+            border: 1px solid var(--tertiary-black);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-orange);
+            background: rgba(255, 107, 53, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .education-content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .nav {
+                top: 20px;
+                right: 20px;
+                padding: 8px 15px;
+            }
+
+            .nav-list {
+                gap: 15px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-placeholder {
+                width: 250px;
+                height: 320px;
+                margin: 0 auto;
+            }
+
+            .work-header, .activity-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .work-period, .activity-period {
+                margin-left: 0;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="course-tooltip" class="course-tooltip" style="display: none;">
+        <div class="tooltip-content">
+            <h5 class="tooltip-title" id="tooltip-title"></h5>
+            <div class="tooltip-skills" id="tooltip-skills"></div>
+            <p class="tooltip-description" id="tooltip-description"></p>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#research" class="nav-link">Research</a></li>
+            <li><a href="#audio-art" class="nav-link">Audio Art</a></li>
+            <li><a href="#coding-projects" class="nav-link">Coding</a></li>
+            <li><a href="#work-experience" class="nav-link">Work</a></li>
+            <li><a href="#accomplishments" class="nav-link">Accomplishments</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Jeremy<br>Hsiao</h1>
+                <div class="hero-subtitle">Digital Artist and Music Technology Researcher</div>
+                <p class="hero-description">
+                    I create at the intersection of Audio Technology, Programming, Communications, Art, and Music. I'm interested in AI for music perception and developing interactive data visualization tools.
+                </p>
+                <p class="hero-description">
+                    I designed this website as a portfolio to showcase my interests, projects, and background.
+                </p>
+            </div>
+            <div class="hero-image">
+                <div class="profile-placeholder">
+                    <img src="headshot.jpg" alt="Jeremy Hsiao" style="width: 100%; height: 100%; object-fit: cover; border-radius: 18px;">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            Scroll to explore ↓
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <h2 class="section-title">Education & Skills</h2>
+        
+        <div class="education-card">
+            <h3 class="education-title">Stanford University</h3>
+            <div class="education-degree">BA in Communications, Double Minors in Computer Science and Music | GPA: 3.7</div>
+            <div class="education-period">Graduated June 2025 (Conferring Degree Fall 2025)</div>
+            <p class="education-description">
+                Interdisciplinary courses in technology, media, and human communication. Hover over the courses to see relevant skills.
+            </p>
+            
+            <div class="education-content-grid">
+                <div class="coursework-section">
+                    <p class="section-label">Relevant Coursework:</p>
+                    <div class="coursework-grid" id="coursework-grid">
+                    </div>
+                </div>
+                <div class="skills-section">
+                    <p class="section-label">Technical Skills:</p>
+                    <div class="skills-compact-grid">
+                        <div class="skill-group">
+                            <span class="skill-category-title">Programming:</span>
+                            <span class="skill-items">Python, Java, C, C++, R, MATLAB, ChucK, JavaScript</span>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-category-title">Libraries and Frameworks:</span>
+                            <span class="skill-items">NumPy, SciPy, PyTorch, JAX, Librosa, Matplotlib, React, Qiskit, D3.js</span>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-category-title">Audio/DSP/Production:</span>
+                            <span class="skill-items">FFmpeg, MAX/MSP, Logic Pro X, ChucK, Spatial Audio</span>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-category-title">Research:</span>
+                            <span class="skill-items">Experimental Design, Data Analysis, Statistical Methods, Causal Inference</span>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-category-title">Tools:</span>
+                            <span class="skill-items">GitHub, Colab, Visual Studio, Xcode, Web Development</span>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-category-title">Languages:</span>
+                            <span class="skill-items">English (Native), German (B1), Chinese (A2)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="education-card">
+            <h3 class="education-title">Stanford in Berlin</h3>
+            <div class="education-degree">Winter 2024 Study Abroad Program</div>
+            <p class="education-description">
+                Independent Research under Malcolm Slaney. Studied German and International Politics. Enriched international perspective on music technology and digital arts in Berlin's innovative culture and music scene.
+            </p>
+        </div>
+
+        <div class="education-card">
+            <h3 class="education-title">Berklee College of Music</h3>
+            <div class="education-degree">Certificate: Producing Music with Logic Pro X <span class="education-period">(Online Certificate Program, 2020)</span></div>
+            <p class="education-description">
+                Completed comprehensive online course covering MIDI and audio recording, software instruments, sound design plugins, mixing techniques, and music production workflows in Logic Pro X.
+            </p>
+        </div>
+    </section>
+
+    <section id="research" class="section">
+        <h2 class="section-title">Research Experience</h2>
+        
+        <div class="research-grid">
+            <div class="research-card">
+                <h3 class="research-title">EEG-Music Research Platform</h3>
+                <p class="research-subtitle">Communication Capstone | March 2025 - June 2025 | Advisor: Nilam Ram</p>
+                <p class="research-description">
+                    Built React/D3.js platform processing 197 experimental conditions across 44 studies, reducing research analysis time by 80%. The tool aggregates data from EEG studies related to music perception and cognition, providing intuitive visualization of temporal trends in research methods and enabling detailed filtering across multiple dimensions of study design.
+                </p>
+                <p class="research-description">
+                    This project addresses the challenge of comparing and synthesizing findings across diverse methodological approaches in neuroscience and music research, facilitating discovery of patterns and relationships between experimental designs, musical stimuli, and EEG methodologies.
+                </p>
+                <div class="research-links">
+                    <a href="https://eeg-music-studies-visualization.vercel.app/" class="research-link" target="_blank">Live Application</a>
+                    <a href="https://github.com/jerhsiao/eeg-music-studies-visualization" class="research-link" target="_blank">GitHub</a>
+                    <a href="https://docs.google.com/document/d/1AKVw64fjULmY22mJq5vzpY0URwU_e3Q3AvMoYs7PLG0/edit?usp=sharing" class="research-link" target="_blank">Research Paper</a>
+                </div>
+            </div>
+
+            <div class="research-card">
+                <h3 class="research-title">Stanford CCRMA Research</h3>
+                <p class="research-subtitle">Stanford CCRMA | August 2024 - March 2025 | Advisor: Malcolm Slaney</p>
+                <h4 class="highlight-title">Cambridge Loudness Model Implementation</h4>
+                <p class="research-description">
+                    Translated and optimized the Cambridge Loudness Model from MATLAB to Python using NumPy, JAX, and SciPy. Implemented comprehensive testing and vectorization to enhance performance for time-varying sounds with binaural inhibition.
+                </p>
+                <h4 class="highlight-title">Auditory Attention Decoder</h4>
+                <p class="research-description">
+                    Reconstructed an EEG-based attention decoder based on existing EEG data to detect and compare attention shifts between music and analytical tasks, exploring how neural signals can help create adaptive sound environments that enhance focus and engagement.
+                </p>
+                <div class="research-links">
+                    <a href="https://github.com/MalcolmSlaney/LoudnessModel" class="research-link" target="_blank">GitHub</a>
+                    <a href="https://docs.google.com/presentation/d/1osTbddvm_dYQkFwH38FGofGsFDtPG9xXWCZBZL6e984/edit?usp=sharing" class="research-link" target="_blank">Project Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audio-art" class="section">
+        <h2 class="section-title">Audio and Computer Art</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="video-container">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1089906793#t=1h18m27s"
+                        width="100%" 
+                        height="250" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Sonicsphere</h3>
+                    <p class="project-description">Audio-visual performance exploring the limits of sound and visual particles.</p>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="video-container">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1061438747#t=17m20s"
+                        width="100%" 
+                        height="250" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Wildfire Data Sonification</h3>
+                    <p class="project-description">Transforming NASA wildfire and wind data from the 2025 LA wildfires into compelling musical performances.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="video-container">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1078552473#t=1h59m17s"
+                        width="100%" 
+                        height="250" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Gridlock</h3>
+                    <p class="period">by Gracielly Abreu & Jeremy Hsiao</p>
+                    <p class="project-description">Audio-visual performance exploring noise pollution with electronic beats.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="video-container">
+                    <iframe 
+                        src="https://player.vimeo.com/video/1094213485"
+                        width="100%" 
+                        height="250" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Touch Reactive Particle System</h3>
+                    <p class="project-description">Interactive sound installation with projection mapping in CCRMA's Listening Room.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="additional-project">
+                <h4 class="project-title">Quantum Generated Harmonics</h4>
+                <p class="text-content">
+                    Created a model that extends audio files into ambient music using quantum circuits to determine harmonic frequencies, phase shifts, and randomized effects.
+                </p>
+                <div class="button-group">
+                    <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" rel="noopener noreferrer" class="link-button">GitHub →</a>
+                    <a href="https://docs.google.com/presentation/d/1iXvqjdD4Uv0B2xInZNIjcA0EJqg3CdBuRZVyMgPhDTs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-button">Presentation →</a>
+                </div>
+            </div>
+
+            <div class="additional-project">
+                <h4 class="project-title">Rainforest IV Realization</h4>
+                <p class="text-content">
+                    Participated in a collaborative realization of David Tudor's electroacoustic environment "Rainforest IV" (1973). Designed and constructed sculptural loudspeakers with unique resonant characteristics.
+                </p>
+                <a href="https://drive.google.com/file/d/1EPIf4qyYpDzVc6xzt2MG9k8rWqLERjbr/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="link-button">Documentation →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="coding-projects" class="section">
+        <h2 class="section-title">Coding Projects</h2>
+        
+        <div class="projects-grid">
+            <div class="card">
+                <p class="tech-stack">React.js, JavaScript, Testing, Performance</p>
+                <h3 class="card-title">N-Back Position Test</h3>
+                <p class="text-content">
+                    A configurable web application for the N-Back cognitive task to measure working memory performance with detailed metrics and data visualization.
+                </p>
+                <a href="https://github.com/jerhsiao/n-back" target="_blank" rel="noopener noreferrer" class="link-button">View on GitHub →</a>
+            </div>
+            
+            <div class="card">
+                <p class="tech-stack">React.js, D3.js, Data Visualization</p>
+                <h3 class="card-title">EEG Music Studies Visualization</h3>
+                <p class="text-content">
+                    Interactive platform for exploring EEG studies on music perception and cognition, featuring timeline visualization, advanced filtering, and dataset export capabilities.
+                </p>
+                <a href="https://github.com/jerhsiao/eeg-music-studies-visualization" target="_blank" rel="noopener noreferrer" class="link-button">View on GitHub →</a>
+            </div>
+            
+            <div class="card">
+                <p class="tech-stack">Python, Trie Data Structure, Algorithms</p>
+                <h3 class="card-title">Word Hunt Solver</h3>
+                <p class="text-content">
+                    A fast solver for 4×4 Word Hunt games using depth-first search algorithm to find all valid English words that can be formed by connecting letters.
+                </p>
+                <a href="https://github.com/jerhsiao/word_hunt_solver" target="_blank" rel="noopener noreferrer" class="link-button">View on GitHub →</a>
+            </div>
+            
+            <div class="card">
+                <p class="tech-stack">Python, NumPy, JAX, Audio Processing</p>
+                <h3 class="card-title">Cambridge Loudness Model</h3>
+                <p class="text-content">
+                    Implementation of the Time-Varying Loudness Model with Binaural Inhibition, translated from MATLAB to Python with optimizations and comprehensive testing.
+                </p>
+                <a href="https://github.com/MalcolmSlaney/LoudnessModel" target="_blank" rel="noopener noreferrer" class="link-button">View on GitHub →</a>
+            </div>
+            
+            <div class="card">
+                <p class="tech-stack">Python, Gmail API, Google Cloud</p>
+                <h3 class="card-title">Email Bot</h3>
+                <p class="text-content">
+                    Automated email system that processes spreadsheet data to send customized emails at scale, handling 22,000 contacts with error tracking and reporting.
+                </p>
+                <a href="https://github.com/jerhsiao/Email-Bot" target="_blank" rel="noopener noreferrer" class="link-button">View on GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="work-experience" class="section">
+        <h2 class="section-title">Work Experience</h2>
+        
+        <div class="card">
+            <div class="work-experience-item">
+                <div class="work-header">
+                    <h4 class="work-title">Audio Communication Research Intern</h4>
+                    <span class="work-location">TU Berlin, Germany</span>
+                    <span class="work-period">Summer 2025</span>
+                </div>
+                <p class="text-content">
+                    Joining the Audio Communication Group at TU Berlin to work on the Somunicate project, developing neural network models that predict user perception of UX interaction sounds. Contributing to the design and analysis of large-scale listening experiments with approximately 1,200 test subjects and helping to build a labeled dataset of 800 current functional sounds from various digital interfaces.
+                </p>
+                <a href="https://www.tu.berlin/en/go245026/" target="_blank" rel="noopener noreferrer" class="link-button" style="margin-top: 10px; display: inline-block;">Project Details →</a>
+            </div>
+
+            <div class="work-experience-item">
+                <div class="work-header">
+                    <h4 class="work-title">Stanford Music Library Worker</h4>
+                    <span class="work-location">Stanford, CA</span>
+                    <span class="work-period">Jan 2022 - Present</span>
+                </div>
+                <p class="text-content">
+                    Managed library database and operations. Processed books, sheet music, vinyl's, CDs, headphones, returns, checkouts, arrivals, transfers, etc.
+                </p>
+            </div>
+
+            <div class="work-experience-item">
+                <div class="work-header">
+                    <h4 class="work-title">Yunus & Youth Fellowship Writer</h4>
+                    <span class="work-location">Remote</span>
+                    <span class="work-period">June 2024 – Dec 2024</span>
+                </div>
+                <p class="text-content">
+                    Conducted 13 interviews to write engaging, in-depth narrative articles and profiles about social entrepreneur fellows and the story of their social enterprise for the Y&Y Fellowship.
+                </p>
+            </div>
+
+            <div class="work-experience-item">
+                <div class="work-header">
+                    <h4 class="work-title">Warner Bros. Pictures Music Intern</h4>
+                    <span class="work-location">Burbank, CA</span>
+                    <span class="work-period">Jun 2022 - Aug 2023</span>
+                </div>
+                <p class="text-content">
+                    Reduced manual processing time by 80% by automating compilation of 500+ music industry contacts. Managed and updated music cue data, script breakdowns, production schedules, licensing data.
+                </p>
+            </div>
+
+            <div class="work-experience-item">
+                <div class="work-header">
+                    <h4 class="work-title">Warner Bros. TV Publicity Intern</h4>
+                    <span class="work-location">Burbank, CA</span>
+                    <span class="work-period">Jun 2021 - Aug 2021</span>
+                </div>
+                <p class="text-content">
+                    Increased TikTok followers on @warnerbrostv by 22% through strategic content creation. Weekly management for 10+ WB entities' social media accounts with overall management of 100+ accounts. Produced up to 20 posts per week.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="accomplishments" class="section">
+        <h2 class="section-title">Accomplishments</h2>
+        
+        <div class="card">
+            <h3 class="card-title">Leadership & Activities</h3>
+            
+            <div class="activity-item">
+                <div class="activity-header">
+                    <h4 class="activity-title">Stanford Concert Network</h4>
+                    <span class="activity-location">Stanford, CA</span>
+                    <span class="activity-period">Sept 2021 - Mar 2022</span>
+                </div>
+                <p class="text-content">
+                    Successfully negotiated contracts with venues and an artist's management team to organize SCN's New Member Showcase concerts with a $2500 budget.
+                </p>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-header">
+                    <h4 class="activity-title">Live Sound Technician</h4>
+                    <span class="activity-location">Vineyard of Hope Church | Walnut, CA</span>
+                    <span class="activity-period">Jul 2021 - Jan 2022</span>
+                </div>
+                <p class="text-content">
+                    Live mixing of drums, keyboard, guitars, bass, and vocals. Set up and operation of audio equipment (mics, 32 input Yamaha live mixer, etc.)
+                </p>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-header">
+                    <h4 class="activity-title">Stanford Sigma Chi Alpha Omega Chapter</h4>
+                    <span class="activity-location">Stanford, CA</span>
+                    <span class="activity-period">Sept 2022 - Present</span>
+                </div>
+                <p class="text-content">
+                    Historian: Responsible for collection and protection of the Chapter history through social media, scrapbooks, organized documentation and events.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Honors & Awards</h3>
+            
+            <div class="awards-list">
+                <div class="award-item">
+                    <h4 class="award-title">2020 Elks Scholar - Most Valuable Student Scholarship</h4>
+                    <p class="award-description">Selected as a Most Valuable Student Scholar $4,000 Semi-Finalist Elks National Foundation Scholarship.</p>
+                </div>
+
+                <div class="award-item">
+                    <h4 class="award-title">2020 Coca-Cola Scholars Semifinalist</h4>
+                    <p class="award-description">1,928 students were selected from over 93,000 applicants from across the country to continue through the selection process.</p>
+                </div>
+
+                <div class="award-item">
+                    <h4 class="award-title">2019 826 National's Poets in Revolt</h4>
+                    <p class="award-description">Poet for anthology created with Amanda Gorman and Kate Deciccio.</p>
+                </div>
+
+                <div class="award-item">
+                    <h4 class="award-title">2019 14th Eugene O'Neill Theater Center Young Playwrights Festival Semifinalist</h4>
+                    <p class="award-description">Selected as semifinalist in national playwriting competition.</p>
+                </div>
+                
+                <div class="award-item">
+                    <h4 class="award-title">2018 National Student Poets Program Semifinalist</h4>
+                    <p class="award-description">1 of 35 semi-finalists chosen out of 23,000 poetry entries.</p>
+                </div>
+
+                <div class="award-item">
+                    <h4 class="award-title">2017 33rd California Young Playwrights Contest Semifinalist</h4>
+                    <p class="award-description">Chosen as a semi-finalist out of 432 playwriting submissions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="research-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 400;">
+                Reach out or learn more about me below!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:jeremyjh@alumni.stanford.edu" class="contact-link">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    Email
+                </a>
+                <a href="https://github.com/jerhsiao" class="contact-link" target="_blank">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/jeremy-hsiao" class="contact-link" target="_blank">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="jeremy-hsiao-resume.pdf" class="contact-link" target="_blank" download>
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                    Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const courseData = {
+            "Quantum Computer Music": {
+                skills: ["ChucK", "Python", "Qiskit", "SciPy", "Quantum Computing/Circuits"],
+                description: "Developed quantum computing applications for music generation using quantum circuits, algorithms, and audio signal processing."
+            },
+            "Programming Abstractions": {
+                skills: ["C++", "Data Structures", "OOP", "Algorithms", "GitHub"],
+                description: "Mastered fundamental data structures, object-oriented programming, and algorithmic thinking in C++."
+            },
+            "Computer Organization and Systems": {
+                skills: ["C", "Assembly", "Memory Management", "Performance Optimization"],
+                description: "Explored low-level computer systems, from C programming to microprocessor architecture and memory organization."
+            },
+            "Data Science for Social Problems": {
+                skills: ["R", "Python", "Causal Inference", "Machine Learning", "Ethics"],
+                description: "Applied statistical methods and machine learning to real-world social challenges in healthcare, education, and energy."
+            },
+            "Computer Graphics and Imaging": {
+                skills: ["3D Graphics", "Ray Tracing", "Linear Algebra", "Shading"],
+                description: "Built understanding of 3D rendering, lighting models, and image synthesis techniques."
+            },
+            "Mathematical Foundations of Computing": {
+                skills: ["Discrete Math", "Complexity Theory", "Formal Logic", "Proofs"],
+                description: "Studied theoretical limits of computation and mathematical reasoning in computer science."
+            },
+            "Probability for Computer Scientists": {
+                skills: ["Statistics", "Probability", "Combinatorics", "Algorithm Analysis"],
+                description: "Applied probability theory to machine learning and algorithmic analysis."
+            },
+            "From Languages to Information": {
+                skills: ["NLP", "Machine Learning", "Text Processing", "Information Retrieval"],
+                description: "Built systems for extracting meaning from text, speech, and web data using computational linguistics."
+            },
+            "Sound Installation": {
+                skills: ["Spatial Audio", "Projection Mapping", "Installation Art", "Logic Pro X", "Sound Design", "MAX/MSP"],
+                description: "Created site-specific sound artworks exploring relationships between sound, space, and architecture."
+            },
+            "Audiovisual Performance": {
+                skills: ["Live Performance", "Video Synthesis", "Multimedia", "Real-time Processing"],
+                description: "Performed live audiovisual works combining music and video in experimental contexts."
+            },
+            "Sonification of Temporal Data": {
+                skills: ["Data Sonification", "Time-series Analysis", "Live Coding", "Ensemble Performance"],
+                description: "Transformed temporal datasets into musical performances through algorithmic composition techniques."
+            },
+            "Sculpting with Sounds, Images, and Words": {
+                skills: ["Web Development", "Multimedia", "Interactive Media", "Logic Pro X", "Creative Coding"],
+                description: "Explored multimodal expression through creative web-based projects and interactive storytelling."
+            },
+            "Jazz History": {
+                skills: ["Music Analysis", "Cultural Studies", "Historical Research"],
+                description: "Studied evolution of jazz from bebop to contemporary styles and key artistic figures."
+            },
+            "Pitch Design": {
+                skills: ["Music Composition", "Harmonic Analysis", "Creative Process"],
+                description: "Developed compositional techniques and personal style through weekly pitch-based exercises."
+            },
+            "The Politics of Algorithms": {
+                skills: ["Critical Theory", "Algorithmic Bias", "Policy Analysis", "Ethics"],
+                description: "Analyzed social and political implications of algorithmic systems in contemporary society."
+            },
+            "Media Psychology": {
+                skills: ["Cognitive Psychology", "Media Effects", "Research Methods", "Data Analysis"],
+                description: "Examined psychological processes in media consumption and human-computer interaction."
+            },
+            "Communication Research Methods": {
+                skills: ["Experimental Design", "Survey Research", "Content Analysis", "Statistical Analysis"],
+                description: "Designed and conducted quantitative communication research using various methodological approaches."
+            }
+        };
+
+        const courseworkGrid = document.getElementById('coursework-grid');
+        Object.keys(courseData).forEach(course => {
+            const courseTag = document.createElement('div');
+            courseTag.className = 'course-tag';
+            courseTag.textContent = course;
+            courseTag.addEventListener('mouseenter', (e) => handleCourseHover(course, e));
+            courseTag.addEventListener('mouseleave', handleCourseLeave);
+            courseworkGrid.appendChild(courseTag);
+        });
+
+        const tooltip = document.getElementById('course-tooltip');
+        const tooltipTitle = document.getElementById('tooltip-title');
+        const tooltipSkills = document.getElementById('tooltip-skills');
+        const tooltipDescription = document.getElementById('tooltip-description');
+
+        function handleCourseHover(course, event) {
+            const rect = event.currentTarget.getBoundingClientRect();
+            const data = courseData[course];
+            
+            tooltipTitle.textContent = course;
+            tooltipDescription.textContent = data.description;
+            
+            tooltipSkills.innerHTML = '';
+            data.skills.forEach(skill => {
+                const skillSpan = document.createElement('span');
+                skillSpan.className = 'tooltip-skill';
+                skillSpan.textContent = skill;
+                tooltipSkills.appendChild(skillSpan);
+            });
+            
+            tooltip.style.left = (rect.right + 10) + 'px';
+            tooltip.style.top = rect.top + 'px';
+            tooltip.style.display = 'block';
+        }
+
+        function handleCourseLeave() {
+            tooltip.style.display = 'none';
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            if (window.scrollY < 100) {
+                current = '';
+            }
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+        
+        updateActiveSection();
+
+        window.addEventListener('scroll', function() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (window.scrollY > 100) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.research-card, .project-card, .education-card, .card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
