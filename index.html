@@ -17,7 +17,7 @@
             --secondary-black: #1a1a1a;
             --tertiary-black: #2a2a2a;
             --accent-orange: #ff6b35;
-            --accent-blue: #9eceff;
+            --accent-blue: #00d4ff;
             --text-primary: #e0e0e0;
             --text-secondary: #a0a0a0;
             --text-muted: #666666;
@@ -457,6 +457,13 @@
             transform: translateY(-2px);
         }
 
+        .highlight-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -614,13 +621,6 @@
             font-weight: 600;
             color: var(--accent-blue);
             margin-bottom: 1.5rem;
-        }
-
-        .subsection-title, .highlight-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: 0.5rem;
         }
 
         .contact-links {
@@ -793,7 +793,7 @@
                     I create at the intersection of Audio Technology, Programming, Communications, Art, and Music. I'm interested in AI for music perception and developing interactive data visualization tools.
                 </p>
                 <p class="hero-description">
-                    I coded this portfolio in HTML and CSS to showcase my personality, interests, projects, and background.
+                    I designed this website as a portfolio to showcase my interests, projects, and background.
                 </p>
             </div>
             <div class="hero-image">
@@ -814,9 +814,10 @@
             <h3 class="education-title">Stanford University</h3>
             <div class="education-degree">BA in Communications, Double Minors in Computer Science and Music | GPA: 3.7</div>
             <div class="education-period">Graduated June 2025 (Conferring Degree Fall 2025)</div>
-            <p>
-                <span style="color: var(--text-primary); font-weight: bold;">Hover over courses to see relevant skills.</span>
+            <p class="education-description">
+                Interdisciplinary courses in technology, media, and human communication. <span style="color: white; font-weight: bold;">Hover over courses to see relevant skills.</span>
             </p>
+            
             <div class="education-content-grid">
                 <div class="coursework-section">
                     <p class="section-label">Relevant Coursework:</p>
@@ -872,8 +873,21 @@
         </div>
     </section>
 
+    <!-- Research Section -->
     <section id="research" class="section">
         <h2 class="section-title">Research Experience</h2>
+        
+        <div class="research-card" style="margin-bottom: 60px;">
+            <p class="tech-stack">Python, RNNs, Deep Learning, Audio Programming</p>
+            <h3 class="research-title">Audio Communication Research Intern</h3>
+            <p class="research-subtitle">TU Berlin, Germany | Summer 2025</p>
+            <p class="research-description">
+                Joining the Audio Communication Group at TU Berlin to work on the Somunicate project, developing neural network models that predict user perception of UX interaction sounds. Contributing to the design and analysis of large-scale listening experiments with approximately 1,200 test subjects and helping to build a labeled dataset of 800 current functional sounds from various digital interfaces.
+            </p>
+            <div class="research-links">
+                <a href="https://www.tu.berlin/en/go245026/" class="research-link" target="_blank">Project Details</a>
+            </div>
+        </div>
         
         <div class="research-grid">
             <div class="research-card">
@@ -895,7 +909,7 @@
 
             <div class="research-card">
                 <p class="tech-stack">Python, MATLAB, JAX, SciPy, Signal Processing</p>
-                <h3 class="research-title">Stanford CCRMA Research</h3>
+                <h3 class="research-title">Stanford Research in Music and Computers</h3>
                 <p class="research-subtitle">Stanford CCRMA | August 2024 - March 2025 | Advisor: Malcolm Slaney</p>
                 <h4 class="highlight-title">Cambridge Loudness Model Implementation</h4>
                 <p class="research-description">
@@ -1015,16 +1029,6 @@
 
         <div class="card">
             <div class="additional-project">
-                <p class="tech-stack">Sound Design, Installation Art, Acoustic Engineering</p>
-                <h4 class="project-title">Rainforest IV Realization</h4>
-                <p class="period">Jan 2025</p>
-                <p class="text-content">
-                    Participated in a collaborative realization of David Tudor's electroacoustic environment "Rainforest IV" (1973). Designed and constructed sculptural loudspeakers with unique resonant characteristics.
-                </p>
-                <a href="https://drive.google.com/file/d/1EPIf4qyYpDzVc6xzt2MG9k8rWqLERjbr/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="link-button">Documentation →</a>
-            </div>
-
-            <div class="additional-project">
                 <p class="tech-stack">Qiskit, ChucK, Quantum Computing</p>
                 <h4 class="project-title">Quantum Generated Harmonics</h4>
                 <p class="period">May 2024</p>
@@ -1035,6 +1039,16 @@
                     <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" rel="noopener noreferrer" class="link-button">GitHub →</a>
                     <a href="https://docs.google.com/presentation/d/1iXvqjdD4Uv0B2xInZNIjcA0EJqg3CdBuRZVyMgPhDTs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-button">Presentation →</a>
                 </div>
+            </div>
+
+            <div class="additional-project">
+                <p class="tech-stack">Sound Design, Installation Art, Acoustic Engineering</p>
+                <h4 class="project-title">Rainforest IV Realization</h4>
+                <p class="period">Jan 2025</p>
+                <p class="text-content">
+                    Participated in a collaborative realization of David Tudor's electroacoustic environment "Rainforest IV" (1973). Designed and constructed sculptural loudspeakers with unique resonant characteristics.
+                </p>
+                <a href="https://drive.google.com/file/d/1EPIf4qyYpDzVc6xzt2MG9k8rWqLERjbr/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="link-button">Documentation →</a>
             </div>
         </div>
     </section>
@@ -1366,7 +1380,7 @@
                 skillSpan.textContent = skill;
                 tooltipSkills.appendChild(skillSpan);
             });
-            
+
             tooltip.style.left = (rect.right + 10) + 'px';
             tooltip.style.top = rect.top + 'px';
             tooltip.style.display = 'block';
@@ -1405,6 +1419,8 @@
                     current = section.getAttribute('id');
                 }
             });
+            
+            // Special case for contact section - highlight when near bottom of page
             const contactSection = document.querySelector('#contact');
             if (contactSection) {
                 const contactTop = contactSection.getBoundingClientRect().top + window.scrollY;
@@ -1412,6 +1428,7 @@
                 const windowHeight = window.innerHeight;
                 const scrollBottom = window.scrollY + windowHeight;
                 
+                // If we're within 200px of the bottom or already in contact section
                 if (scrollBottom >= documentHeight - 200 || scrollPosition >= contactTop) {
                     current = 'contact';
                 }
