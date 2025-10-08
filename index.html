@@ -774,6 +774,7 @@
 
     <nav class="nav">
         <ul class="nav-list">
+            <li><a href="#highlights" class="nav-link">Highlights</a></li>
             <li><a href="#education" class="nav-link">Education</a></li>
             <li><a href="#research" class="nav-link">Research</a></li>
             <li><a href="#audio-art" class="nav-link">AV Art</a></li>
@@ -806,6 +807,124 @@
             Scroll to explore ↓
         </div>
     </section>
+<section id="highlights" class="section">
+        <h2 class="section-title">Highlights</h2>
+        <div class="card" style="margin-bottom: 50px;">
+            <h3 class="card-title" style="margin-bottom: 30px;">Research Publications & Code</h3>
+            
+            <div class="projects-grid">
+                <div class="card" style="background: var(--tertiary-black); border-color: rgba(255, 107, 53, 0.3);">
+                    <p class="tech-stack">React.js, D3.js, Data Visualization, Research</p>
+                    <h3 class="card-title" style="font-size: 1.5rem; color: var(--accent-orange);">EEG Music Studies Visualization and Research Paper</h3>
+                    <p class="period">June 2025</p>
+                    <p class="text-content">
+                        Interactive platform for exploring EEG studies on music perception and cognition, featuring timeline visualization, advanced filtering, and dataset export capabilities. Wrote an accompanying full-length paper titled "The Evolution of EEG-Based Music Research: Methodological Transitions and Neurophysiological Insights from the 1970's to the Present"
+                    </p>
+                    <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" target="_blank" rel="noopener noreferrer" class="link-button">View App and Paper on The Change Lab at Stanford →</a>
+                </div>
+
+                <div class="card" style="background: var(--tertiary-black); border-color: rgba(255, 107, 53, 0.3);">
+                    <p class="tech-stack">Python, RNNs, BiLSTM, Deep Learning, Audio Processing</p>
+                    <h3 class="card-title" style="font-size: 1.5rem; color: var(--accent-orange);">Learning-Based Onset Detection for Functional Sound Segmentation</h3>
+                    <p class="period">Summer 2025 | TU Berlin Sound Innovation Lab</p>
+                    <p class="text-content">
+                        Deep learning system for detecting onset points in functional sounds (UI audio, device sounds, consumer electronics). The trained BiLSTM model achieves 86.5% F1 score on our dataset of 2,107 files, outperforming traditional energy-based methods (83.2%) and librosa's onset detection (74.2%). Technical paper for IEEE in progress.
+                    </p>
+                    <a href="https://www.tu.berlin/en/go245026/" target="_blank" rel="noopener noreferrer" class="link-button">Project Details →</a>
+                </div>
+
+                <div class="card" style="background: var(--tertiary-black); border-color: rgba(255, 107, 53, 0.3);">
+                    <p class="tech-stack">Python, MATLAB, JAX, SciPy, Signal Processing</p>
+                    <h3 class="card-title" style="font-size: 1.5rem; color: var(--accent-orange);">Cambridge Loudness Model Implementation</h3>
+                    <p class="period">Aug 2024 - Dec 2024 | Stanford CCRMA</p>
+                    <p class="text-content">
+                        Co-authored implementation and optimization of Loudness Model for Time Varying Sounds with Binaural Inhibition, translating from MATLAB to Python with NumPy, JAX, and SciPy. Added comprehensive testing suite, demonstration scripts, and optimized processes.
+                    </p>
+                    <div class="research-links">
+                        <a href="https://github.com/MalcolmSlaney/LoudnessModel" class="research-link" target="_blank">GitHub</a>
+                        <a href="https://docs.google.com/presentation/d/1osTbddvm_dYQkFwH38FGofGsFDtPG9xXWCZBZL6e984/edit?usp=sharing" class="research-link" target="_blank">Project Details</a>
+                    </div>
+                </div>
+
+                <div class="card" style="background: var(--tertiary-black); border-color: rgba(255, 107, 53, 0.3);">
+                  <p class="tech-stack">Python, MATLAB, Signal Processing, EEG Analysis</p>
+                  <h3 class="card-title" style="font-size: 1.5rem; color: var(--accent-orange);">Auditory Attention Decoder</h3>
+                  <p class="period">Aug 2024 - Dec 2024 | Stanford CCRMA</p>
+                  <p class="text-content">
+                      Implemented a backward temporal response function (TRF) model based on the MAD-EEG dataset methodology to decode auditory attention from EEG data. The system predicts which instrument a listener is focusing on within polyphonic music mixtures (duets and trios) by reconstructing audio representations from multi-channel brain activity. Processed the MAD-EEG dataset with 20-channel EEG recordings from 8 subjects attending to target instruments. The decoder correlates neural responses with attended versus unattended musical sources, achieving results comparable to speech-based attention decoding despite the added complexity of musical stimuli played through loudspeakers rather than headphones.
+                  </p>
+                  <a href="https://github.com/jerhsiao/music_research" class="research-link" target="_blank">GitHub</a>
+              </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title" style="margin-bottom: 30px;">Audio/Visual Art</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1078552473#t=2h00m00s"
+                            width="100%" 
+                            height="250" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="project-content">
+                        <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
+                        <h3 class="project-title">Gridlock</h3>
+                        <p class="period">by Gracielly Abreu & Jeremy Hsiao. May 2025</p>
+                        <p class="project-description">Audio-visual performance exploring noise pollution with electronic beats and a sequencer built in MAX/MSP.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1094213485"
+                            width="100%" 
+                            height="250" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="project-content">
+                        <p class="tech-stack">MAX/MSP, Logic Pro X, Projection Mapping</p>
+                        <h3 class="project-title">Touch Reactive Audio Generative Particle System</h3>
+                        <p class="period">March 2025</p>
+                        <p class="project-description">Interactive sound installation with projection mapping and audio generation with MAX/MSP in CCRMA's Listening Room.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="background: var(--tertiary-black);">
+                    <p class="tech-stack">Qiskit, ChucK, Quantum Computing</p>
+                    <h4 class="project-title" style="font-size: 1.3rem;">Quantum Generated Harmonics</h4>
+                    <p class="period">May 2024</p>
+                    <p class="text-content">
+                        Created a program that analyzes input audio to extract key and pitch using librosa, then applies IBM's Qiskit quantum circuits to generate ambient music. Quantum measurements determine harmonic frequencies, phase shifts, and note generation. Implemented delay, reverb, and low-pass filtering to blend quantum-generated harmonics with original audio. Samples of output available in presentation. Graduate course project (MUSIC 222A, Stanford CCRMA).
+                    </p>
+                    <div class="button-group">
+                        <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" rel="noopener noreferrer" class="link-button">GitHub →</a>
+                        <a href="https://docs.google.com/presentation/d/1iXvqjdD4Uv0B2xInZNIjcA0EJqg3CdBuRZVyMgPhDTs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-button">Presentation →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                  <div class="video-container" style="height: 300px;">
+                      <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2092610563&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                  </div>
+                  <div class="project-content">
+                      <p class="tech-stack">Logic Pro X, Music Production, Mixing, Mastering</p>
+                      <h3 class="project-title">Electronic Tracks Produced</h3>
+                      <p class="period">2020 - 2025</p>
+                      <p class="project-description">Original electronic music productions showcasing composition, sound design, and audio engineering skills.</p>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </section>
 
     <section id="education" class="section">
         <h2 class="section-title">Education & Skills</h2>
@@ -813,7 +932,7 @@
         <div class="education-card">
             <h3 class="education-title">Stanford University</h3>
             <div class="education-degree">BA in Communications, Double Minors in Computer Science and Music | GPA: 3.7</div>
-            <div class="education-period">Graduated June 2025 (Conferring Degree Fall 2025)</div>
+            <div class="education-period">Graduated June 2025 (Conferred Degree Sept 2025)</div>
             <p class="education-description">
                 Interdisciplinary courses in technology, media, and human communication. <span style="color: white; font-weight: bold;">Hover over courses to see relevant skills.</span>
             </p>
@@ -873,7 +992,6 @@
         </div>
     </section>
 
-    <!-- Research Section -->
     <section id="research" class="section">
         <h2 class="section-title">Research Experience</h2>
         
@@ -972,7 +1090,7 @@
             <div class="project-card">
                 <div class="video-container">
                     <iframe 
-                        src="https://player.vimeo.com/video/1078552473#t=1h59m17s"
+                        src="https://player.vimeo.com/video/1078552473#t=2h00m00s"
                         width="100%" 
                         height="250" 
                         frameborder="0" 
@@ -984,7 +1102,7 @@
                     <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
                     <h3 class="project-title">Gridlock</h3>
                     <p class="period">by Gracielly Abreu & Jeremy Hsiao. May 2025</p>
-                    <p class="project-description">Audio-visual performance exploring noise pollution with electronic beats.</p>
+                    <p class="project-description">Audio-visual performance exploring noise pollution with electronic beats and a sequencer built in MAX/MSP.</p>
                 </div>
             </div>
 
@@ -1020,9 +1138,9 @@
                 </div>
                 <div class="project-content">
                     <p class="tech-stack">MAX/MSP, Logic Pro X, Projection Mapping</p>
-                    <h3 class="project-title">Touch Reactive Particle System</h3>
+                    <h3 class="project-title">Touch Reactive Audio Generative Particle System</h3>
                     <p class="period">March 2025</p>
-                    <p class="project-description">Interactive sound installation with projection mapping in CCRMA's Listening Room.</p>
+                    <p class="project-description">Interactive sound installation with projection mapping and audio generation with MAX/MSP in CCRMA's Listening Room.</p>
                 </div>
             </div>
 
@@ -1052,7 +1170,7 @@
                 <h4 class="project-title">Quantum Generated Harmonics</h4>
                 <p class="period">May 2024</p>
                 <p class="text-content">
-                    Created a program that extends audio files into ambient music using quantum circuits to determine harmonic frequencies, phase shifts, and randomized effects.
+                    Created a program that analyzes input audio to extract key and pitch using librosa, then applies IBM's Qiskit quantum circuits to generate ambient music. Quantum measurements determine harmonic frequencies, phase shifts, and note generation. Implemented delay, reverb, and low-pass filtering to blend quantum-generated harmonics with original audio. Graduate course project (MUSIC 222A, Stanford CCRMA).
                 </p>
                 <div class="button-group">
                     <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" rel="noopener noreferrer" class="link-button">GitHub →</a>
@@ -1134,12 +1252,12 @@
         <div class="card">
             <div class="work-experience-item">
                 <div class="work-header">
-                    <h4 class="work-title">Audio Communication Research Intern</h4>
+                    <h4 class="work-title">Audio Communication Student Research Engineer</h4>
                     <span class="work-location">TU Berlin, Germany</span>
                     <span class="work-period">Summer 2025</span>
                 </div>
                 <p class="text-content">
-                Leading research as first author on onset detection classification methods for academic publication. Built a Recurring Neural Network model to detect onsets of functional sounds, improving detection from existing algorithm. Project aims to develop neural network models that predict user perception of UX interaction sounds, with a focus on perceptual segmentation and signal-based audio cues. Designed evaluation pipelines using annotated datasets and identified improvements that enhanced model precision. Project conducted in collaboration with the Sound Innovation Lab, an industry-facing UX sound research lab specializing in applied audio design for human–computer interaction.
+                Leading research as first author on onset detection classification methods for academic publication. Paper in progress. Built a Recurring Neural Network model to detect onsets of functional sounds, improving detection from existing algorithm. Project aims to develop neural network models that predict user perception of UX interaction sounds, with a focus on perceptual segmentation and signal-based audio cues. Designed evaluation pipelines using annotated datasets and identified improvements that enhanced model precision. Project conducted in collaboration with the Sound Innovation Lab, an industry-facing UX sound research lab specializing in applied audio design for human–computer interaction.
                 </p>
                 <a href="https://www.tu.berlin/en/go245026/" target="_blank" rel="noopener noreferrer" class="link-button" style="margin-top: 10px; display: inline-block;">Project Details →</a>
             </div>
@@ -1151,7 +1269,7 @@
                     <span class="work-period">Jan 2022 - Present</span>
                 </div>
                 <p class="text-content">
-                    Managed library database and operations. Processed books, sheet music, vinyl's, CDs, headphones, returns, checkouts, arrivals, transfers, etc.
+                    Managed circulation and database operations for Stanford's Music Library. Assisted patrons with checkouts, returns, and locating materials using music-specific cataloging systems. Processed diverse collections including books, sheet music, vinyl records, CDs, and audio equipment. Catalogued new arrivals and coordinated inter-library transfers.
                 </p>
             </div>
 
@@ -1162,7 +1280,7 @@
                     <span class="work-period">June 2024 – Dec 2024</span>
                 </div>
                 <p class="text-content">
-                    Conducted 13 interviews to write engaging, in-depth narrative articles and profiles about social entrepreneur fellows and the story of their social enterprise for the Y&Y Fellowship.
+                    Conducted 13 interviews to write in-depth narrative profiles of social entrepreneur fellows and their enterprises for the Yunus & Youth Fellowship. Rewrote and revised an additional 12 articles on past fellows for publication on the organization's platform. Translated complex social impact initiatives into accessible stories highlighting each fellow's mission, challenges, and community impact.
                 </p>
             </div>
 
