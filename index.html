@@ -6,12 +6,8 @@
     <title>Jeremy Hsiao - Digital Artist & Researcher</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
             --primary-black: #0a0a0a;
             --secondary-black: #1a1a1a;
@@ -23,10 +19,8 @@
             --text-muted: #666666;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--primary-black);
@@ -35,583 +29,181 @@
             overflow-x: hidden;
         }
 
-        
         .course-tooltip {
             position: fixed;
             background: linear-gradient(135deg, var(--secondary-black) 0%, var(--tertiary-black) 100%);
             border: 1px solid var(--accent-orange);
             border-radius: 15px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             max-width: 320px;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            animation: tooltipFadeIn 0.2s ease-out;
             padding: 0;
         }
 
-        @keyframes tooltipFadeIn {
-            from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
         .tooltip-content { padding: 16px 18px; }
-        .tooltip-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: 10px;
-            line-height: 1.3;
-            border-bottom: 1px solid var(--tertiary-black);
-            padding-bottom: 8px;
-        }
+        .tooltip-title { font-size: 0.9rem; font-weight: 600; color: var(--accent-orange); margin-bottom: 10px; border-bottom: 1px solid var(--tertiary-black); padding-bottom: 8px; }
         .tooltip-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-        .tooltip-skill {
-            background: var(--accent-blue);
-            color: var(--primary-black);
-            padding: 3px 8px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            line-height: 1.2;
-        }
+        .tooltip-skill { background: var(--accent-blue); color: var(--primary-black); padding: 3px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: 500; }
         .tooltip-description { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 
-        
-        .nav {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1000;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 10px 20px;
-            border: 1px solid var(--tertiary-black);
-        }
-        .nav-list {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            font-size: 0.9rem;
-        }
+        .nav { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 50px; padding: 8px 16px; border: 1px solid var(--tertiary-black); }
+        .nav-list { display: flex; list-style: none; gap: 20px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.85rem; transition: color 0.3s; position: relative; }
         .nav-link:hover, .nav-link.active { color: var(--accent-orange); }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-orange);
-            transition: width 0.3s ease;
-        }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent-orange); transition: width 0.3s ease; }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-        
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-        .nav-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background: var(--text-primary);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 4px 0; transition: 0.3s; }
         .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .nav-toggle.active span:nth-child(2) { opacity: 0; }
         .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            position: relative;
-            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
-        }
-        .hero-content {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-        .hero-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease-out;
-        }
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 2.5rem);
-            font-weight: 300;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-        .hero-image { position: relative; animation: fadeInRight 1s ease-out 0.6s both; }
-        .profile-placeholder {
-            width: 300px;
-            height: 400px;
-            background: linear-gradient(135deg, var(--tertiary-black), var(--secondary-black));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--accent-orange);
-            position: relative;
-            overflow: hidden;
-        }
-        .profile-placeholder::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-        .profile-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 18px;
-        }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 0 5%; background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%); }
+        .hero-content { max-width: 1200px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: center; }
+        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 8rem); font-weight: 900; line-height: 0.9; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: clamp(1.2rem, 3vw, 2.5rem); font-weight: 300; color: var(--text-secondary); margin-bottom: 2rem; font-family: 'JetBrains Mono', monospace; }
+        .hero-description { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 2rem; max-width: 600px; }
+        .profile-placeholder { width: 300px; height: 400px; background: linear-gradient(135deg, var(--tertiary-black), var(--secondary-black)); border-radius: 20px; border: 2px solid var(--accent-orange); overflow: hidden; }
+        .profile-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+        .scroll-indicator { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: var(--text-muted); font-size: 0.9rem; animation: bounce 2s infinite; transition: opacity 0.3s; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } }
 
-        
-        .section {
-            padding: 120px 5% 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--text-primary);
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
-        }
+        .section { padding: 100px 5% 60px; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 2rem; color: var(--text-primary); position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 70px; height: 4px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue)); }
 
-        
-        .card {
-            background: var(--secondary-black);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid var(--tertiary-black);
-            margin-bottom: 30px;
-            transition: all 0.4s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-orange);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-        .card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 1.5rem;
-        }
-        
-        
-        .card--highlight {
-            background: var(--tertiary-black);
-            border-color: rgba(255, 107, 53, 0.3);
-        }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+@media (max-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+        .grid-dense { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .grid-web-tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+
+        .card { background: var(--secondary-black); border-radius: 12px; padding: 18px; border: 1px solid var(--tertiary-black); transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-3px); border-color: var(--accent-orange); }
+        .card--highlight { background: var(--tertiary-black); border-color: rgba(255, 107, 53, 0.3); }
+        .card--sm { padding: 14px; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem; line-height: 1.3; }
         .card-title--orange { color: var(--accent-orange); }
-        .card-title--sm { font-size: 1.5rem; }
+        .card-title--lg { font-size: 1.4rem; margin-bottom: 1rem; }
 
-        
-        .tech-stack {
-            color: var(--accent-blue);
-            font-size: 0.9rem;
-            margin-bottom: 0.9rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 300;
-            background: rgba(0, 212, 255, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-        .period {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.9rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .text-content {
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
+        .project-card { background: var(--secondary-black); border-radius: 12px; overflow: hidden; border: 1px solid var(--tertiary-black); transition: all 0.3s ease; }
+        .project-card:hover { transform: translateY(-3px); border-color: var(--accent-blue); }
+        .project-card iframe { width: 100%; height: 150px; border: none; }
+        .project-content { padding: 14px; }
+        .project-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; line-height: 1.3; }
+        .project-description { color: var(--text-secondary); line-height: 1.5; font-size: 0.8rem; }
 
-        
-        .link-btn {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border: 1px solid var(--accent-blue);
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            display: inline-block;
-        }
-        .link-btn:hover {
-            background: var(--accent-blue);
-            color: var(--primary-black);
-            transform: translateY(-2px);
-        }
-        .button-group { display: flex; gap: 20px; flex-wrap: wrap; }
+        .research-card { background: var(--secondary-black); border-radius: 12px; padding: 18px; border: 1px solid var(--tertiary-black); transition: all 0.3s ease; }
+        .research-card:hover { transform: translateY(-4px); border-color: var(--accent-orange); }
+        .research-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--accent-orange); margin-bottom: 0.4rem; }
+        .research-subtitle { color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace; }
+        .research-description { color: var(--text-primary); margin-bottom: 0.75rem; line-height: 1.55; font-size: 0.85rem; }
+        .research-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
-            gap: 60px;
-            margin-bottom: 80px;
-        }
+        .tech-stack { color: var(--accent-blue); font-size: 0.75rem; margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace; background: rgba(0, 212, 255, 0.1); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(0, 212, 255, 0.2); display: inline-block; }
+        .period { color: var(--text-secondary); font-size: 0.75rem; margin-bottom: 0.4rem; font-family: 'JetBrains Mono', monospace; }
+        .text-content { color: var(--text-primary); margin-bottom: 0.75rem; line-height: 1.55; font-size: 0.85rem; }
+        .link-btn { color: var(--accent-blue); text-decoration: none; font-weight: 600; padding: 5px 10px; border: 1px solid var(--accent-blue); border-radius: 20px; font-size: 0.75rem; display: inline-block; transition: all 0.3s ease; }
+        .link-btn:hover { background: var(--accent-blue); color: var(--primary-black); }
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; }
 
-        
-        .project-card {
-            background: var(--secondary-black);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--tertiary-black);
-            transition: all 0.4s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-        }
-        .project-card .video-container iframe {
-            width: 100%;
-            height: 250px;
-            border: none;
-        }
-        .project-content { padding: 30px; }
-        .project-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.9rem;
-        }
-        .project-description { color: var(--text-secondary); line-height: 1.6; }
+        .education-card { background: var(--secondary-black); border-radius: 12px; padding: 24px; border: 1px solid var(--tertiary-black); margin-bottom: 20px; transition: all 0.3s ease; }
+        .education-card:hover { transform: translateY(-3px); border-color: var(--accent-orange); }
+        .education-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent-blue); margin-bottom: 0.3rem; }
+        .education-degree { color: var(--text-primary); font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .education-period { color: var(--text-muted); font-style: italic; font-size: 0.85rem; margin-bottom: 0.6rem; }
+        .education-description { color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.55; }
+        .education-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 1rem; }
+        .section-label { font-weight: 600; margin-bottom: 10px; color: var(--accent-orange); font-size: 0.9rem; }
+        .coursework-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+        .course-tag { background: var(--tertiary-black); color: var(--text-primary); padding: 5px 10px; border-radius: 14px; font-size: 0.7rem; border: 1px solid var(--tertiary-black); transition: all 0.3s ease; cursor: pointer; }
+        .course-tag:hover { border-color: var(--accent-orange); background: rgba(255, 107, 53, 0.15); }
+        .skills-compact-grid { display: flex; flex-direction: column; gap: 10px; background: rgba(255, 107, 53, 0.05); padding: 16px; border-radius: 10px; border: 1px solid rgba(255, 107, 53, 0.2); }
+        .skill-group { display: flex; flex-direction: column; gap: 2px; }
+        .skill-category-title { font-weight: 700; font-size: 0.8rem; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 0.5px; }
+        .skill-items { color: var(--text-primary); font-size: 0.85rem; line-height: 1.4; }
 
-        
-        .research-card {
-            background: var(--secondary-black);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid var(--tertiary-black);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .research-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        .research-card:hover::before { left: 100%; }
-        .research-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-orange);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-        .research-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: 0.9rem;
-        }
-        .research-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.9rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .research-description {
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-        .research-links { display: flex; gap: 20px; flex-wrap: wrap; }
-        .highlight-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: 0.5rem;
-        }
-
-        
-        .education-card {
-            background: var(--secondary-black);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid var(--tertiary-black);
-            margin-bottom: 40px;
-            transition: all 0.4s ease;
-        }
-        .education-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-orange);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-        .education-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--accent-blue);
-            margin-bottom: 0.5rem;
-        }
-        .education-degree { color: var(--text-primary); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.9rem; }
-        .education-period { color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin-bottom: 0.9rem; }
-        .education-description { color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
-        .education-content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 2rem;
-        }
-        .section-label { font-weight: 600; margin-bottom: 15px; color: var(--accent-orange); font-size: 1rem; }
-
-        
-        .coursework-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-        .course-tag {
-            background: var(--tertiary-black);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid var(--tertiary-black);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .course-tag:hover {
-            border-color: var(--accent-orange);
-            background: rgba(255, 107, 53, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
-        }
-
-        
-        .skills-compact-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background: rgba(255, 107, 53, 0.05);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-        }
-        .skill-group { display: flex; flex-direction: column; gap: 6px; }
-        .skill-category-title {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--accent-orange);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .skill-items { color: var(--text-primary); font-size: 0.95rem; line-height: 1.6; font-weight: 500; }
-
-        
-        .list-item {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--tertiary-black);
-        }
+        .list-item { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--tertiary-black); }
         .list-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .list-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-        .list-title { font-size: 1.2rem; font-weight: 600; color: var(--accent-orange); margin: 0; }
-        .list-location { color: var(--text-secondary); font-size: 0.9rem; }
-        .list-period { color: var(--text-muted); font-style: italic; font-size: 0.85rem; margin-left: auto; }
+        .list-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+        .list-title { font-size: 0.95rem; font-weight: 600; color: var(--accent-orange); margin: 0; }
+        .list-location { color: var(--text-secondary); font-size: 0.8rem; }
+        .list-period { color: var(--text-muted); font-style: italic; font-size: 0.75rem; margin-left: auto; }
 
-        
-        .awards-list { display: flex; flex-direction: column; gap: 25px; }
-        .award-item { padding-bottom: 20px; border-bottom: 1px solid var(--tertiary-black); }
+        .collapsible-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 12px 0; border-bottom: 1px solid var(--tertiary-black); user-select: none; }
+        .collapsible-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-secondary); font-weight: 500; }
+        .collapsible-header:hover h3 { color: var(--accent-orange); }
+        .collapsible-icon { font-size: 1rem; color: var(--text-secondary); transition: transform 0.3s; }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .collapsible-content.open { max-height: 1500px; }
+        .collapsible-header.open .collapsible-icon { transform: rotate(180deg); }
+
+        .awards-list { display: flex; flex-direction: column; gap: 12px; }
+        .award-item { padding-bottom: 12px; border-bottom: 1px solid var(--tertiary-black); }
         .award-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .award-title { font-size: 1.1rem; font-weight: 600; color: var(--accent-orange); margin-bottom: 8px; }
-        .award-description { color: var(--text-secondary); margin: 0; line-height: 1.6; }
+        .award-title { font-size: 0.9rem; font-weight: 600; color: var(--accent-orange); margin-bottom: 4px; }
+        .award-description { color: var(--text-secondary); margin: 0; line-height: 1.45; font-size: 0.85rem; }
 
-        
-        .contact-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background: var(--secondary-black);
-            border: 1px solid var(--tertiary-black);
-            border-radius: 12px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            min-width: 140px;
-            justify-content: center;
-        }
-        .contact-link:hover {
-            border-color: var(--accent-orange);
-            background: rgba(255, 107, 53, 0.05);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
-        }
-        .contact-icon { width: 20px; height: 20px; fill: currentColor; }
+        .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+        .contact-link { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--secondary-black); border: 1px solid var(--tertiary-black); border-radius: 10px; color: var(--text-primary); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; }
+        .contact-link:hover { border-color: var(--accent-orange); transform: translateY(-2px); }
+        .contact-icon { width: 18px; height: 18px; fill: currentColor; }
 
-        
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            animation: bounce 2s infinite;
-            transition: opacity 0.3s;
-        }
-
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        
         @media (max-width: 1024px) {
-            .nav-list { gap: 15px; }
-            .nav-link { font-size: 0.8rem; }
+            .nav-list { gap: 12px; }
+            .nav-link { font-size: 0.75rem; }
+            .grid-4 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
         }
 
         @media (max-width: 768px) {
-            
-            .nav {
-                top: 20px;
-                right: 20px;
-                padding: 10px 15px;
-                border-radius: 15px;
-            }
+            .nav { top: 15px; right: 15px; padding: 8px 12px; border-radius: 12px; }
             .nav-toggle { display: block; }
-            .nav-list {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background: rgba(26, 26, 26, 0.98);
-                border: 1px solid var(--tertiary-black);
-                border-radius: 15px;
-                padding: 20px;
-                margin-top: 10px;
-                min-width: 180px;
-                gap: 15px;
-            }
+            .nav-list { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; background: rgba(26, 26, 26, 0.98); border: 1px solid var(--tertiary-black); border-radius: 12px; padding: 16px; margin-top: 8px; min-width: 160px; gap: 12px; }
             .nav-list.active { display: flex; }
-            .nav-link { font-size: 1rem; }
-
-            
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px;
-            }
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 30px; }
             .hero-description { margin-left: auto; margin-right: auto; }
-
-            
-            .research-grid, .education-content-grid { grid-template-columns: 1fr; gap: 30px; }
-
-            
             .profile-placeholder { width: 250px; height: 320px; margin: 0 auto; }
-
-            
-            .list-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .education-content-grid { grid-template-columns: 1fr; }
+            .list-header { flex-direction: column; align-items: flex-start; gap: 4px; }
             .list-period { margin-left: 0; }
         }
 
         @media (max-width: 480px) {
-            .section { padding: 80px 4% 60px; }
-            .card, .research-card, .education-card { padding: 25px; }
-            .hero { padding: 0 4%; }
+            .section { padding: 70px 4% 50px; }
+            .card, .research-card, .education-card { padding: 16px; }
             .profile-placeholder { width: 200px; height: 260px; }
             .contact-links { flex-direction: column; align-items: center; }
-            .contact-link { width: 100%; max-width: 280px; }
-            .button-group { flex-direction: column; }
-            .link-btn { text-align: center; }
+            .contact-link { width: 100%; max-width: 260px; justify-content: center; }
+        }
+        
+        .project-card--wide {
+          grid-column: 1 / -1;
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          align-items: stretch;
+        }
+        
+        .project-card--wide iframe {
+          height: 300px;
+        }
+        
+        .project-card--wide .project-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+          .project-card--wide {
+            grid-template-columns: 1fr;
+          }
+          .project-card--wide iframe {
+            height: 180px;
+          }
         }
     </style>
 </head>
@@ -625,17 +217,12 @@
     </div>
 
     <nav class="nav">
-        <button class="nav-toggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
         <ul class="nav-list">
             <li><a href="#highlights" class="nav-link">Highlights</a></li>
             <li><a href="#education" class="nav-link">Education</a></li>
             <li><a href="#research" class="nav-link">Research</a></li>
-            <li><a href="#audio-art" class="nav-link">AV Art</a></li>
-            <li><a href="#coding-projects" class="nav-link">Coding</a></li>
+            <li><a href="#creative" class="nav-link">Creative</a></li>
             <li><a href="#work-experience" class="nav-link">Work</a></li>
             <li><a href="#accomplishments" class="nav-link">Accomplishments</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -647,17 +234,11 @@
             <div class="hero-text">
                 <h1>Jeremy<br>Hsiao</h1>
                 <div class="hero-subtitle">Digital Artist and Music Technology Researcher</div>
-                <p class="hero-description">
-                    I create at the intersection of Audio Technology, Computer Science, Communications, Art, and Music. I'm interested in how audio processing, AI, and music perception combine to shape both creative expression and interactive, human-centered systems.
-                </p>
-                <p class="hero-description">
-                    I designed this website as a portfolio to showcase my interests, projects, and background. Check out my Highlights for examples of research in sound, as well as installations and performances.
-                </p>
+                <p class="hero-description">I create at the intersection of Audio Technology, Computer Science, Communications, Art, and Music. I'm interested in how audio processing, AI, and music perception combine to shape both creative expression and interactive, human-centered systems.</p>
+                <p class="hero-description">I designed this website as a portfolio to showcase my interests, projects, and background. Check out my Highlights for examples of research in sound, as well as installations and performances.</p>
             </div>
             <div class="hero-image">
-                <div class="profile-placeholder">
-                    <img src="headshot.jpg" alt="Jeremy Hsiao">
-                </div>
+                <div class="profile-placeholder"><img src="headshot.jpg" alt="Jeremy Hsiao"></div>
             </div>
         </div>
         <div class="scroll-indicator">Scroll to explore ↓</div>
@@ -666,128 +247,94 @@
     <section id="highlights" class="section">
         <h2 class="section-title">Highlights</h2>
         
-        <div class="card">
-            <h3 class="card-title">Research Publications & Code</h3>
-            <div class="projects-grid">
-                <div class="card card--highlight">
-                    <p class="tech-stack">React.js, D3.js, Data Visualization, Research</p>
-                    <h3 class="card-title card-title--orange card-title--sm">EEG Music Studies Visualization and Research Paper</h3>
+        <div class="card" style="margin-bottom: 20px;">
+            <h3 class="card-title card-title--lg">Research Publications & Code</h3>
+            <div class="grid-4" style="margin-top: 14px;">
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">React.js, D3.js, Data Visualization</p>
+                    <h4 class="card-title card-title--orange">EEG Music Studies Visualization</h4>
                     <p class="period">June 2025 | Advisor: Prof Nilam Ram</p>
-                    <p class="text-content">
-                        Interactive platform for exploring EEG studies on music perception and cognition, featuring timeline visualization, advanced filtering, and dataset export capabilities. Curated a dataset of 44 studies, 197 experimental conditions, and 13 publicly available datasets. Wrote an accompanying full-length paper titled "The Evolution of EEG-Based Music Research: Methodological Transitions and Neurophysiological Insights from the 1970's to the Present".
-                    </p>
-                    <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" target="_blank" rel="noopener noreferrer" class="link-btn">View App and Paper on The Change Lab at Stanford →</a>
+                    <p class="text-content">Interactive platform for exploring EEG studies on music perception. Curated 44 studies, 197 conditions, 13 datasets. Wrote accompanying paper on methodological transitions in EEG-based music research.</p>
+                    <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" target="_blank" class="link-btn">View on The Change Lab →</a>
                 </div>
-
-                <div class="card card--highlight">
-                    <p class="tech-stack">Python, RNNs, PyTorch, ONNX, BiLSTM, Deep Learning, Audio Processing</p>
-                    <h3 class="card-title card-title--orange card-title--sm">Learning-Based Onset Detection for Functional Sound Segmentation</h3>
-                    <p class="period">Summer 2025 | TU Berlin Sound Innovation Lab | Prof. Stefan Weinzierl</p>
-                    <p class="text-content">
-                        Leading research as first author on onset detection classification methods for academic publication. Built deep learning RNN system for detecting onset points in functional sounds. The trained BiLSTM model achieves 86.5% F1 score on our dataset of 2,107 files, outperforming traditional energy-based methods (83.2%) and librosa's onset detection (74.2%). Technical paper for IEEE in progress.
-                    </p>
-                    <a href="https://www.tu.berlin/en/go245026/" target="_blank" rel="noopener noreferrer" class="link-btn">Project Details →</a>
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">Python, PyTorch, BiLSTM, ONNX</p>
+                    <h4 class="card-title card-title--orange">Onset Detection for Functional Sounds</h4>
+                    <p class="period">Summer 2025 | TU Berlin | Prof. Weinzierl</p>
+                    <p class="text-content">First-author research on deep learning onset detection. BiLSTM RNN achieves 86.5% F1 on 2,107 files, outperforming librosa (74.2%) and energy-based methods (83.2%).</p>
+                    <a href="https://www.tu.berlin/en/go245026/" target="_blank" class="link-btn">Project Details →</a>
                 </div>
-
-                <div class="card card--highlight">
-                    <p class="tech-stack">Python, MATLAB, JAX, SciPy, Signal Processing</p>
-                    <h3 class="card-title card-title--orange card-title--sm">Cambridge Loudness Model Implementation</h3>
-                    <p class="period">Aug 2024 - Dec 2024 | Stanford CCRMA | Advisor: Prof. Malcolm Slaney</p>
-                    <p class="text-content">
-                        Co-authored implementation and optimization of Loudness Model for Time Varying Sounds with Binaural Inhibition, translating from MATLAB to Python with NumPy, JAX, and SciPy. Added comprehensive testing suite and demonstration scripts.
-                    </p>
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">Python, JAX, SciPy, MATLAB</p>
+                    <h4 class="card-title card-title--orange">Cambridge Loudness Model</h4>
+                    <p class="period">Aug - Dec 2024 | CCRMA | Prof. Slaney</p>
+                    <p class="text-content">Co-authored Python implementation of TVL2018 Loudness Model with Binaural Inhibition. Translated from MATLAB with NumPy, JAX, SciPy optimizations.</p>
                     <div class="button-group">
                         <a href="https://github.com/MalcolmSlaney/LoudnessModel" class="link-btn" target="_blank">GitHub</a>
-                        <a href="https://docs.google.com/presentation/d/1osTbddvm_dYQkFwH38FGofGsFDtPG9xXWCZBZL6e984/edit?usp=sharing" class="link-btn" target="_blank">Project Details</a>
+                        <a href="https://docs.google.com/presentation/d/1osTbddvm_dYQkFwH38FGofGsFDtPG9xXWCZBZL6e984/edit?usp=sharing" class="link-btn" target="_blank">Details</a>
                     </div>
                 </div>
-
-                <div class="card card--highlight">
-                    <p class="tech-stack">Python, MATLAB, Signal Processing, EEG Analysis</p>
-                    <h3 class="card-title card-title--orange card-title--sm">Auditory Attention Decoder</h3>
-                    <p class="period">Aug 2024 - Dec 2024 | Stanford CCRMA</p>
-                    <p class="text-content">
-                        Reconstructed a backward temporal response function (TRF) model based on the MAD-EEG dataset, recreating results detecting auditory attention from EEG data. The system predicts which instrument a listener is focusing on within polyphonic music mixtures by reconstructing audio representations from multi-channel brain activity.
-                    </p>
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">Python, MATLAB, EEG Analysis</p>
+                    <h4 class="card-title card-title--orange">Auditory Attention Decoder</h4>
+                    <p class="period">Aug - Dec 2024 | Stanford CCRMA</p>
+                    <p class="text-content">Reconstructed backward TRF model from MAD-EEG dataset. Predicts which instrument a listener focuses on in polyphonic music from EEG data.</p>
                     <a href="https://github.com/jerhsiao/music_research" class="link-btn" target="_blank">GitHub</a>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h3 class="card-title">Audio/Visual Art</h3>
-            <div class="projects-grid">
+            <h3 class="card-title card-title--lg">Audio/Visual Art</h3>
+            <div class="grid-dense" style="margin-top: 14px;">
                 <div class="project-card">
-                    <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/1094213485" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                    <iframe src="https://player.vimeo.com/video/1094213485" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <div class="project-content">
-                        <p class="tech-stack">MAX/MSP, Logic Pro X, Projection Mapping</p>
-                        <h3 class="project-title">Touch Reactive Audio Generative Sound Installation</h3>
+                        <p class="tech-stack">MAX/MSP, Projection Mapping</p>
+                        <h3 class="project-title">Touch Reactive Sound Installation</h3>
                         <p class="period">March 2025 | Prof. Constantin Basica</p>
-                        <p class="project-description">Interactive sound installation with projection mapping, contact microphones, audio generation, and particle generation with MAX/MSP in CCRMA's Listening Room.</p>
+                        <p class="project-description">Interactive installation with projection mapping, contact mics, audio generation, and particle visuals in CCRMA's Listening Room.</p>
                     </div>
                 </div>
-
                 <div class="project-card">
-                    <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/1094613411" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                    <iframe src="https://player.vimeo.com/video/1089906793#t=1h18m27s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <div class="project-content">
-                        <p class="tech-stack">Logic Pro X, Sound Design, Video Editing</p>
-                        <h3 class="project-title">Inside</h3>
-                        <p class="period">April 2025 | Prof. Constantin Basica</p>
-                        <p class="project-description">Audiovisual Composition using Foley, Audio Design, and Video Editing. This piece explores the concept of confinement and the restlessness of feeling trapped.</p>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/1089906793#t=1h18m27s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <div class="project-content">
-                        <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
+                        <p class="tech-stack">MAX/MSP, Logic Pro X</p>
                         <h3 class="project-title">Sonicsphere</h3>
                         <p class="period">June 2025 | Prof. Constantin Basica</p>
-                        <p class="project-description">Audio-visual performance exploring the limits of sound, FX, and audio-reactive visual particles in Max/MSP and Logic Pro X.</p>
+                        <p class="project-description">AV performance exploring sound, FX, and audio-reactive particles. Begins with a knock, expands into synced visuals. Live audiovisual performance built around rhythmic triggers and evolving FX chains, driving audio-reactive particle behavior in real time.</p>
                     </div>
                 </div>
-
                 <div class="project-card">
-                    <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/1078552473#t=2h00m00s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                    <iframe src="https://player.vimeo.com/video/1078552473#t=2h00m00s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <div class="project-content">
-                        <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
-                        <h3 class="project-title">Gridlock Audiovisual Performance</h3>
-                        <p class="period">by Gracielly Abreu & Jeremy Hsiao. May 2025 | Prof. Constantin Basica</p>
-                        <p class="project-description">Audio-visual performance exploring two aspects of big city life: noise pollution and club culture.</p>
+                        <p class="tech-stack">MAX/MSP, Logic Pro X</p>
+                        <h3 class="project-title">Gridlock</h3>
+                        <p class="period">May 2025 | w/ Gracielly Abreu</p>
+                        <p class="project-description">Collaborative live AV set using MAX/MSP sequencing and arpeggiation to drive reactive visuals, exploring density, overload, and urban noise.</p>
                     </div>
                 </div>
-
-                <div class="card card--highlight">
-                    <p class="tech-stack">Qiskit, ChucK, Quantum Computing</p>
-                    <h4 class="project-title">Quantum Generated Harmonics</h4>
-                    <p class="period">May 2024</p>
-                    <p class="text-content">
-                        Created a program that analyzes input audio to extract key and pitch using librosa, then applies IBM's Qiskit quantum circuits to generate ambient music. Graduate course project (MUSIC 222A, Stanford CCRMA).
-                    </p>
-                    <div class="button-group">
-                        <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub →</a>
-                        <a href="https://docs.google.com/presentation/d/1iXvqjdD4Uv0B2xInZNIjcA0EJqg3CdBuRZVyMgPhDTs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-btn">Presentation →</a>
-                    </div>
-                </div>
-
                 <div class="project-card">
-                    <div class="video-container" style="height: 300px;">
-                        <iframe height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2092610563&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-                    </div>
+                    <iframe src="https://player.vimeo.com/video/1061438747#t=17m20s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <div class="project-content">
-                        <p class="tech-stack">Logic Pro X, Music Production, Mixing, Mastering</p>
-                        <h3 class="project-title">Electronic Tracks Produced By Me</h3>
-                        <p class="period">2020 - 2025</p>
-                        <p class="project-description">Original electronic music productions showcasing composition, sound design, and audio engineering skills in Logic Pro X.</p>
+                        <p class="tech-stack">Python, Data Sonification</p>
+                        <h3 class="project-title">Wildfire Data Sonification</h3>
+                        <p class="period">March 2025 | Ensemble Performance</p>
+                        <p class="project-description">NASA wildfire and wind data from 2025 LA fires transformed into musical performance.</p>
                     </div>
+                </div>
+                
+                <div class="project-card project-card--wide">
+                  <iframe scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2092610563&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                  </iframe>
+                
+                  <div class="project-content">
+                    <p class="tech-stack">Logic Pro X, Production</p>
+                    <h3 class="project-title">Electronic Tracks Produced By Me</h3>
+                    <p class="period">2020 - 2025</p>
+                    <p class="project-description">Original electronic music showcasing composition, sound design, and audio engineering.</p>
+                  </div>
                 </div>
             </div>
         </div>
@@ -795,289 +342,230 @@
 
     <section id="education" class="section">
         <h2 class="section-title">Education & Skills</h2>
-        
         <div class="education-card">
             <h3 class="education-title">Stanford University</h3>
             <div class="education-degree">BA in Communications, Double Minors in Computer Science and Music | GPA: 3.7</div>
             <div class="education-period">Graduated June 2025 (Conferred Degree Sept 2025)</div>
-            <p class="education-description">
-                Interdisciplinary courses in technology, media, and human communication. <span style="color: white; font-weight: bold;">Hover over courses to see relevant skills.</span>
-            </p>
-            
+            <p class="education-description">Interdisciplinary courses in technology, media, and human communication. <span style="color: white; font-weight: bold;">Hover over courses to see relevant skills.</span></p>
             <div class="education-content-grid">
-                <div class="coursework-section">
+                <div>
                     <p class="section-label">Relevant Coursework:</p>
                     <div class="coursework-grid" id="coursework-grid"></div>
                 </div>
-                <div class="skills-section">
+                <div>
                     <p class="section-label">Technical Skills:</p>
                     <div class="skills-compact-grid">
-                        <div class="skill-group">
-                            <span class="skill-category-title">Programming:</span>
-                            <span class="skill-items">Python, Java, C, C++, CSS, R, MATLAB, ChucK, JavaScript</span>
-                        </div>
-                        <div class="skill-group">
-                            <span class="skill-category-title">Libraries and Frameworks:</span>
-                            <span class="skill-items">NumPy, SciPy, PyTorch, JAX, Librosa, Matplotlib, React, Qiskit, D3.js</span>
-                        </div>
-                        <div class="skill-group">
-                            <span class="skill-category-title">Audio/DSP/Production:</span>
-                            <span class="skill-items">FFmpeg, MAX/MSP, Logic Pro X, ChucK, Spatial Audio</span>
-                        </div>
-                        <div class="skill-group">
-                            <span class="skill-category-title">Research:</span>
-                            <span class="skill-items">Experimental Design, Data Analysis, Statistical Methods, Causal Inference</span>
-                        </div>
-                        <div class="skill-group">
-                            <span class="skill-category-title">Tools:</span>
-                            <span class="skill-items">GitHub, Colab, Visual Studio, Xcode, Web Development</span>
-                        </div>
-                        <div class="skill-group">
-                            <span class="skill-category-title">Languages:</span>
-                            <span class="skill-items">English (Native), German (B1), Chinese (A2)</span>
-                        </div>
+                        <div class="skill-group"><span class="skill-category-title">Programming:</span><span class="skill-items">Python, Java, C, C++, CSS, R, MATLAB, ChucK, JavaScript</span></div>
+                        <div class="skill-group"><span class="skill-category-title">Libraries and Frameworks:</span><span class="skill-items">NumPy, SciPy, PyTorch, JAX, Librosa, Matplotlib, React, Qiskit, D3.js</span></div>
+                        <div class="skill-group"><span class="skill-category-title">Audio/DSP/Production:</span><span class="skill-items">FFmpeg, MAX/MSP, Logic Pro X, ChucK, Spatial Audio</span></div>
+                        <div class="skill-group"><span class="skill-category-title">Research:</span><span class="skill-items">Experimental Design, Data Analysis, Statistical Methods, Causal Inference</span></div>
+                        <div class="skill-group"><span class="skill-category-title">Tools:</span><span class="skill-items">GitHub, Colab, Visual Studio, Xcode, Web Development</span></div>
+                        <div class="skill-group"><span class="skill-category-title">Languages:</span><span class="skill-items">English (Native), German (B1), Chinese (A2)</span></div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="education-card">
             <h3 class="education-title">Stanford in Berlin</h3>
             <div class="education-degree">Fall 2024 Study Abroad Program</div>
-            <p class="education-description">
-                Independent Research under Malcolm Slaney. Studied German and International Politics. Enriched international perspective on music technology and digital arts in Berlin's innovative culture and music scene.
-            </p>
+            <p class="education-description">Independent Research under Malcolm Slaney. Studied German and International Politics. Enriched international perspective on music technology and digital arts in Berlin's innovative culture and music scene.</p>
         </div>
     </section>
 
     <section id="research" class="section">
         <h2 class="section-title">Research Experience</h2>
-        
-        <div class="research-card" style="margin-bottom: 60px;">
-            <p class="tech-stack">Python, RNNs, PyTorch, ONNX, Deep Learning, Audio Programming</p>
-            <h3 class="research-title">Audio Communication Research Intern</h3>
-            <p class="research-subtitle">TU Berlin, Germany | Summer 2025 | Prof. Stefan Weinzierl</p>
-            <p class="research-description">
-                Leading research as first author on onset detection classification methods for academic publication. Built deep learning RNN system for detecting onset points in functional sounds (UI audio, device sounds, consumer electronics). The trained BiLSTM model achieves 86.5% F1 score on our dataset of 2,107 files, outperforming traditional energy-based methods (83.2%) and librosa's onset detection (74.2%). Technical paper for IEEE in progress.
-            </p>
-            <div class="research-links">
+        <div class="grid-4">
+            <div class="research-card">
+                <p class="tech-stack">Python, PyTorch, ONNX, BiLSTM</p>
+                <h3 class="research-title">Audio Communication Research Intern</h3>
+                <p class="research-subtitle">TU Berlin | Summer 2025 | Prof. Weinzierl</p>
+                <p class="research-description">First-author research on onset detection for functional (UI/UX) sounds. BiLSTM RNN achieves 86.5% F1, outperforming librosa (74.2%) and energy-based methods (83.2%) under consistent timing tolerance.</p>
                 <a href="https://www.tu.berlin/en/go245026/" class="link-btn" target="_blank">Project Details</a>
             </div>
-        </div>
-        
-        <div class="research-grid">
             <div class="research-card">
-                <p class="tech-stack">React, D3.js, CSS, Data Visualization</p>
+                <p class="tech-stack">React, D3.js, Data Visualization</p>
                 <h3 class="research-title">EEG-Music Research Platform</h3>
-                <p class="research-subtitle">Communication Capstone | March 2025 - June 2025 | Advisor: Prof. Nilam Ram</p>
-                <p class="research-description">
-                    Built React/D3.js platform processing 197 experimental conditions across 44 studies. The tool aggregates data from EEG studies related to music perception and cognition, providing intuitive visualization of temporal trends in research methods.
-                </p>
-                <p class="research-description">
-                    This project addresses the challenge of comparing and synthesizing findings across diverse methodological approaches in neuroscience and music research.
-                </p>
+                <p class="research-subtitle">Capstone | Mar - Jun 2025 | Prof. Ram</p>
+                <p class="research-description">Full-length paper "The Evolution of EEG-Based Music Research" analyzing methodological transitions from 1970s to present. Aggregated 44 studies with 197 conditions examining paradigm shifts in music cognition research methodology.</p>
                 <div class="research-links">
-                    <a href="https://eeg-music-studies-visualization.vercel.app/" class="link-btn" target="_blank">Live Application</a>
+                    <a href="https://eeg-music-studies-visualization.vercel.app/" class="link-btn" target="_blank">App</a>
                     <a href="https://github.com/jerhsiao/eeg-music-studies-visualization" class="link-btn" target="_blank">GitHub</a>
-                    <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" class="link-btn" target="_blank">Application Overview</a>
+                    <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" class="link-btn" target="_blank">Paper</a>
                 </div>
             </div>
-
             <div class="research-card">
-                <p class="tech-stack">Python, MATLAB, JAX, SciPy, Signal Processing</p>
-                <h3 class="research-title">Stanford Research in Music and Computers</h3>
-                <p class="research-subtitle">Stanford CCRMA | August 2024 - Dec 2024 | Advisor: Prof. Malcolm Slaney</p>
-                <h4 class="highlight-title">Cambridge Loudness Model Implementation</h4>
-                <p class="research-description">
-                    Co-authored implementation and optimization of Loudness Model for Time Varying Sounds with Binaural Inhibition, translating from MATLAB to Python with NumPy, JAX, and SciPy.
-                </p>
-                <h4 class="highlight-title">Auditory Attention Decoder</h4>
-                <p class="research-description">
-                    Reconstructed a backward temporal response function (TRF) model based on the MAD-EEG dataset, recreating results detecting auditory attention from EEG data. The system predicts which instrument a listener is focusing on within polyphonic music mixtures.
-                </p>
+                <p class="tech-stack">Python, JAX, SciPy, MATLAB</p>
+                <h3 class="research-title">Cambridge Loudness Model</h3>
+                <p class="research-subtitle">CCRMA | Aug - Dec 2024 | Prof. Slaney</p>
+                <p class="research-description">Co-authored Python implementation of TVL2018 Loudness Model with Binaural Inhibition. Translated from MATLAB with optimizations and testing suite.</p>
                 <div class="research-links">
-                    <a href="https://github.com/MalcolmSlaney/LoudnessModel" class="link-btn" target="_blank">Loudness Model GitHub</a>
-                    <a href="https://github.com/jerhsiao/music_research" class="link-btn" target="_blank">Auditory Attention Decoder GitHub</a>
-                    <a href="https://docs.google.com/presentation/d/1osTbddvm_dYQkFwH38FGofGsFDtPG9xXWCZBZL6e984/edit?usp=sharing" class="link-btn" target="_blank">Project Details</a>
+                    <a href="https://github.com/MalcolmSlaney/LoudnessModel" class="link-btn" target="_blank">GitHub</a>
+                    <a href="https://docs.google.com/presentation/d/1osTbddvm_dYQkFwH38FGofGsFDtPG9xXWCZBZL6e984/edit?usp=sharing" class="link-btn" target="_blank">Details</a>
                 </div>
+            </div>
+            <div class="research-card">
+                <p class="tech-stack">Python, MATLAB, EEG Analysis</p>
+                <h3 class="research-title">Auditory Attention Decoder</h3>
+                <p class="research-subtitle">CCRMA | Aug - Dec 2024 | Prof. Slaney</p>
+                <p class="research-description">Reconstructed backward TRF model from MAD-EEG dataset. Predicts which instrument a listener focuses on in polyphonic music mixtures from brain activity.</p>
+                <a href="https://github.com/jerhsiao/music_research" class="link-btn" target="_blank">GitHub</a>
             </div>
         </div>
     </section>
 
-    <section id="audio-art" class="section">
+    <section id="creative" class="section">
         <h2 class="section-title">Audio, Visual, and Computer Art</h2>
-        <div class="card">
-            <div class="list-item">
-                <p class="tech-stack">React, Vite, Tone.js, Canvas Rendering, Optimization Algorithms</p>
-                <h4 class="project-title">Gradient Descent Sonification & Visualization</h4>
-                <p class="period">Dec 2025</p>
-                <p class="text-content">
-                    Built an interactive web application that visualizes and sonifies gradient descent optimization in real time. Implemented particle-based simulations of SGD, Momentum, and Normalized SGD using custom canvas rendering, dynamic graphing, and audio synthesis. Designed a responsive UI, intuitive controls, and an educational mode explaining each optimization method with assistance from Claude Opus 4.5.
-                <div class="button-group">
-                    <a href="https://github.com/jerhsiao/gradient-descent" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub →</a>
-                    <a href="https://gradient-descent-beryl.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-btn">Web App →</a>
-                </div>
-            </div>
-        </div>
-        <div class="projects-grid">
+        <div class="grid-dense" style="margin-bottom: 20px;">
             <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1119608350" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/1119608350" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <div class="project-content">
-                    <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
-                    <h3 class="project-title">Real-Time Audio Reactive Particle System with Max/MSP</h3>
+                    <p class="tech-stack">MAX/MSP, Logic Pro X</p>
+                    <h3 class="project-title">Real-Time Audio Reactive Particle System</h3>
                     <p class="period">Aug 2025</p>
-                    <p class="project-description">Experimented with visualizing chaos attractor algorithm for particle system, created audio reactive parameters, and recorded over my own music.</p>
+                    <p class="project-description">Chaos attractor particle system with audio reactive parameters, recorded over original music.</p>
                 </div>
             </div>
-            
             <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1089906793#t=1h18m27s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/1089906793#t=1h18m27s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <div class="project-content">
-                    <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
+                    <p class="tech-stack">MAX/MSP, Logic Pro X</p>
                     <h3 class="project-title">Sonicsphere</h3>
                     <p class="period">June 2025 | Prof. Constantin Basica</p>
-                    <p class="project-description">Audio-visual performance exploring the limits of sound, FX, and audio-reactive visual particles in Max/MSP and Logic Pro X. It begins with a single knock, and a single particle, but expands into a sphere of sounds and colorful visuals synced together in real-time.</p>
+                    <p class="project-description">AV performance: begins with a knock and single particle, expands into synced audio-visual sphere. Live audiovisual performance built around rhythmic triggers and evolving FX chains, driving audio-reactive particle behavior in real time.</p>
                 </div>
             </div>
-
             <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1078552473#t=2h00m00s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/1078552473#t=2h00m00s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <div class="project-content">
-                    <p class="tech-stack">MAX/MSP, Logic Pro X, Sound Design</p>
+                    <p class="tech-stack">MAX/MSP, Logic Pro X</p>
                     <h3 class="project-title">Gridlock</h3>
-                    <p class="period">by Gracielly Abreu & Jeremy Hsiao. May 2025 | Prof. Constantin Basica</p>
-                    <p class="project-description">Audio-visual performance exploring two aspects of a big city life: noise pollution and club culture. Made with real-time audio-reactive visuals, arpeggiator, and a sequencer all built in MAX/MSP.</p>
+                    <p class="period">May 2025 | w/ Gracielly Abreu</p>
+                    <p class="project-description">Collaborative live AV set using MAX/MSP sequencing and arpeggiation to drive reactive visuals, exploring density, overload, and urban noise.</p>
                 </div>
             </div>
-
             <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1094613411" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/1094613411" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <div class="project-content">
-                    <p class="tech-stack">Logic Pro X, Sound Design, Video Editing</p>
+                    <p class="tech-stack">Logic Pro X, Foley, Video Editing</p>
                     <h3 class="project-title">Inside</h3>
                     <p class="period">April 2025 | Prof. Constantin Basica</p>
-                    <p class="project-description">Audiovisual Composition using Foley, Audio Design, and Video Editing. This piece explores the concept of confinement and the restlessness of feeling trapped.</p>
+                    <p class="project-description">AV composition using foley, audio design, and video editing exploring confinement and restlessness.</p>
                 </div>
             </div>
-            
             <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1094213485" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/1094213485" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <div class="project-content">
-                    <p class="tech-stack">MAX/MSP, Logic Pro X, Projection Mapping</p>
-                    <h3 class="project-title">Touch Reactive Audio Generative Particle System</h3>
+                    <p class="tech-stack">MAX/MSP, Projection Mapping</p>
+                    <h3 class="project-title">Touch Reactive Installation</h3>
                     <p class="period">March 2025</p>
-                    <p class="project-description">Interactive sound installation with projection mapping, contact microphones, audio generation, and particle generation with MAX/MSP in CCRMA's Listening Room.</p>
+                    <p class="project-description">Interactive sound installation with contact mics, harmonic frequency generation, and particle visuals.</p>
                 </div>
             </div>
-
             <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1061438747#t=17m20s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/1061438747#t=17m20s" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <div class="project-content">
-                    <p class="tech-stack">Python, Data Visualization</p>
+                    <p class="tech-stack">Python, Data Sonification</p>
                     <h3 class="project-title">Wildfire Data Sonification</h3>
-                    <p class="period">Performed by Ensemble for Sonification of Temporal Data. March 2025</p>
-                    <p class="project-description">Transforming NASA wildfire and wind data from the 2025 LA wildfires into musical performance.</p>
+                    <p class="period">March 2025 | Ensemble Performance</p>
+                    <p class="project-description">NASA wildfire and wind data from 2025 LA fires (FRP, Brightness temperature, wind gust speed, etc.) transformed into musical performance.</p>
                 </div>
             </div>
         </div>
+        
+        <div class="card" style="margin-bottom: 20px;">
+            <h3 class="card-title card-title--lg">Interactive Web Tools</h3>
+            <div class="grid-web-tools" style="margin-top: 14px;">
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">React, Vite, Tone.js, Canvas</p>
+                    <h4 class="card-title card-title--orange">Gradient Descent Sonification</h4>
+                    <p class="period">Dec 2025</p>
+                    <p class="text-content">Interactive web app visualizing and sonifying gradient descent. Particle simulations of SGD, Momentum, Normalized SGD with canvas rendering and audio synthesis.</p>
+                    <div class="button-group">
+                        <a href="https://github.com/jerhsiao/gradient-descent" target="_blank" class="link-btn">GitHub</a>
+                        <a href="https://gradient-descent-beryl.vercel.app/" target="_blank" class="link-btn">App</a>
+                    </div>
+                </div>
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">React, TypeScript, D3.js, Web Audio</p>
+                    <h4 class="card-title card-title--orange">Dissonance Explorer</h4>
+                    <p class="period">Jan 2026</p>
+                    <p class="text-content">Interactive tool for sensory dissonance based on Plomp-Levelt model. D3.js visualization, Web Audio synthesis, timbre presets, click-to-audition.</p>
+                    <div class="button-group">
+                        <a href="https://github.com/jerhsiao/dissonance_explorer" target="_blank" class="link-btn">GitHub</a>
+                        <a href="https://dissonance-explorer.vercel.app/" target="_blank" class="link-btn">App</a>
+                    </div>
+                </div>
+                <div class="card card--highlight card--sm">
+                    <p class="tech-stack">React.js, D3.js, CSS</p>
+                    <h4 class="card-title card-title--orange">EEG Music Studies Visualization</h4>
+                    <p class="period">June 2025</p>
+                    <p class="text-content">React/D3.js platform with interactive timeline, advanced filtering by EEG metrics, electrode configurations, musical stimuli. Built responsive SVG components with dynamic state management and data export.</p>
+                    <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" target="_blank" class="link-btn">View on Change Lab →</a>
+                </div>
+            </div>
+        </div>
+        
 
-        <div class="card">
+        <div class="card" style="margin-bottom: 20px;">
             <div class="list-item">
                 <p class="tech-stack">Qiskit, ChucK, Quantum Computing</p>
-                <h4 class="project-title">Quantum Generated Harmonics</h4>
+                <h4 class="list-title">Quantum Generated Harmonics</h4>
                 <p class="period">May 2024</p>
-                <p class="text-content">
-                    Created a program that analyzes input audio to extract key and pitch using librosa, then applies IBM's Qiskit quantum circuits to generate ambient music. Quantum measurements determine harmonic frequencies, phase shifts, and note generation. Graduate course project (MUSIC 222A, Stanford CCRMA).
-                </p>
+                <p class="text-content">Pipeline that extracts key/pitch features from an input audio file (librosa) and uses Qiskit circuit measurements to drive harmonic choices (frequency ratios, phase offsets, event timing) for ambient generation. Built for MUSIC 222A (CCRMA).</p>
                 <div class="button-group">
-                    <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub →</a>
-                    <a href="https://docs.google.com/presentation/d/1iXvqjdD4Uv0B2xInZNIjcA0EJqg3CdBuRZVyMgPhDTs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-btn">Presentation →</a>
+                    <a href="https://github.com/jerhsiao/Quantum-Generated-Harmonics" target="_blank" class="link-btn">GitHub →</a>
+                    <a href="https://docs.google.com/presentation/d/1iXvqjdD4Uv0B2xInZNIjcA0EJqg3CdBuRZVyMgPhDTs/edit?usp=sharing" target="_blank" class="link-btn">Presentation →</a>
                 </div>
             </div>
-
             <div class="list-item">
                 <p class="tech-stack">Sound Design, Installation Art, Acoustic Engineering</p>
-                <h4 class="project-title">Rainforest IV Realization</h4>
+                <h4 class="list-title">Rainforest IV Realization</h4>
                 <p class="period">Jan 2025</p>
-                <p class="text-content">
-                    Participated in a collaborative realization of David Tudor's electroacoustic environment "Rainforest IV" (1973). Designed and constructed sculptural loudspeakers with unique resonant characteristics. Utilized contact microphones, amplifiers, and sound design in Logic Pro X.
-                </p>
-                <a href="https://drive.google.com/file/d/1EPIf4qyYpDzVc6xzt2MG9k8rWqLERjbr/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="link-btn">Documentation →</a>
+                <p class="text-content">Participated in a collaborative realization of David Tudor's electroacoustic environment "Rainforest IV" (1973). Designed and constructed sculptural loudspeakers with unique resonant characteristics. Utilized contact microphones, amplifiers, and sound design in Logic Pro X.</p>
+                <a href="https://drive.google.com/file/d/1EPIf4qyYpDzVc6xzt2MG9k8rWqLERjbr/view?usp=drive_link" target="_blank" class="link-btn">Documentation →</a>
             </div>
         </div>
-    </section>
 
-    <section id="coding-projects" class="section">
-        <h2 class="section-title">Coding Projects</h2>
-        
-        <div class="projects-grid">            
-            <div class="card">
-                <p class="tech-stack">React.js, D3.js, Data Visualization</p>
-                <h3 class="card-title">EEG Music Studies Visualization</h3>
-                <p class="period">June 2025</p>
-                <p class="text-content">
-                    Interactive platform for exploring EEG studies on music perception and cognition, featuring timeline visualization, advanced filtering, and dataset export capabilities. Curated a dataset of 44 studies, 197 experimental conditions, and 13 publicly available datasets.
-                </p>
-                <a href="https://thechangelab.stanford.edu/the-evolution-of-eeg-based-music/" target="_blank" rel="noopener noreferrer" class="link-btn">View on The Change Lab at Stanford →</a>
-            </div>
 
-            <div class="card">
-                <p class="tech-stack">React.js, JavaScript</p>
-                <h3 class="card-title">N-Back Position Test</h3>
-                <p class="period">April 2025</p>
-                <p class="text-content">
-                    A configurable web application for the N-Back cognitive task to measure working memory performance with detailed metrics and data visualization.
-                </p>
-                <a href="https://github.com/jerhsiao/n-back" target="_blank" rel="noopener noreferrer" class="link-btn">View on GitHub →</a>
+        <div class="card">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h3>Other Projects</h3>
+                <span class="collapsible-icon">▼</span>
             </div>
-
-            <div class="card">
-                <p class="tech-stack">Python, Trie Data Structure, Algorithms</p>
-                <h3 class="card-title">Word Hunt Solver</h3>
-                <p class="period">Jan 2025</p>
-                <p class="text-content">
-                    A fast solver for 4×4 Word Hunt games using depth-first search algorithm to find all valid English words that can be formed by connecting letters.
-                </p>
-                <a href="https://github.com/jerhsiao/word_hunt_solver" target="_blank" rel="noopener noreferrer" class="link-btn">View on GitHub →</a>
-            </div>
-            
-            <div class="card">
-                <p class="tech-stack">Python, NumPy, JAX, Audio Processing</p>
-                <h3 class="card-title">Cambridge Loudness Model</h3>
-                <p class="period">Aug 2024 - Dec 2024</p>
-                <p class="text-content">
-                    Implementation of the Time-Varying Loudness Model with Binaural Inhibition, translated from MATLAB to Python with optimizations and comprehensive testing.
-                </p>
-                <a href="https://github.com/MalcolmSlaney/LoudnessModel" target="_blank" rel="noopener noreferrer" class="link-btn">View on GitHub →</a>
-            </div>
-            
-            <div class="card">
-                <p class="tech-stack">Python, Gmail API, Google Cloud</p>
-                <h3 class="card-title">Email Bot</h3>
-                <p class="period">July 2024</p>
-                <p class="text-content">
-                    Automated email system that processes spreadsheet data to send customized emails at scale, handling 22,000 contacts with error tracking and reporting.
-                </p>
-                <a href="https://github.com/jerhsiao/Email-Bot" target="_blank" rel="noopener noreferrer" class="link-btn">View on GitHub →</a>
+            <div class="collapsible-content">
+                <div class="list-item">
+                    <div class="list-header">
+                        <h4 class="list-title">N-Back Position Test</h4>
+                        <span class="list-location">React.js, JavaScript</span>
+                        <span class="list-period">April 2025</span>
+                    </div>
+                    <p class="text-content">A configurable web application for the N-Back cognitive task to measure working memory performance with detailed metrics and data visualization.</p>
+                    <a href="https://github.com/jerhsiao/n-back" target="_blank" class="link-btn">View on GitHub →</a>
+                </div>
+                <div class="list-item">
+                    <div class="list-header">
+                        <h4 class="list-title">Word Hunt Solver</h4>
+                        <span class="list-location">Python, Trie Data Structure, Algorithms</span>
+                        <span class="list-period">Jan 2025</span>
+                    </div>
+                    <p class="text-content">A fast solver for 4×4 Word Hunt games using depth-first search algorithm to find all valid English words that can be formed by connecting letters.</p>
+                    <a href="https://github.com/jerhsiao/word_hunt_solver" target="_blank" class="link-btn">View on GitHub →</a>
+                </div>
+                <div class="list-item">
+                    <div class="list-header">
+                        <h4 class="list-title">Email Bot</h4>
+                        <span class="list-location">Python, Gmail API, Google Cloud</span>
+                        <span class="list-period">July 2024</span>
+                    </div>
+                    <p class="text-content">Automated email system that processes spreadsheet data to send customized emails at scale, handling 22,000 contacts with error tracking and reporting.</p>
+                    <a href="https://github.com/jerhsiao/Email-Bot" target="_blank" class="link-btn">View on GitHub →</a>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="work-experience" class="section">
         <h2 class="section-title">Work Experience</h2>
-        
         <div class="card">
             <div class="list-item">
                 <div class="list-header">
@@ -1085,119 +573,90 @@
                     <span class="list-location">TU Berlin, Germany</span>
                     <span class="list-period">Summer 2025</span>
                 </div>
-                <p class="text-content">
-                    Leading research as first author on onset detection classification methods for academic publication. Built a Recurring Neural Network model to detect onsets of functional sounds, improving detection from existing algorithm. Project conducted in collaboration with the Sound Innovation Lab.
-                </p>
-                <a href="https://www.tu.berlin/en/go245026/" target="_blank" rel="noopener noreferrer" class="link-btn">Project Details →</a>
+                <p class="text-content">First-author research on onset detection for functional (UI/UX) sounds. BiLSTM RNN achieves 86.5% F1, outperforming librosa (74.2%) and energy-based methods (83.2%) under consistent timing tolerance. Project conducted in collaboration with the Sound Innovation Lab.</p>
+                <a href="https://www.tu.berlin/en/go245026/" target="_blank" class="link-btn">Project Details →</a>
             </div>
-
             <div class="list-item">
                 <div class="list-header">
                     <h4 class="list-title">Stanford Music Library Worker</h4>
                     <span class="list-location">Stanford, CA</span>
                     <span class="list-period">Jan 2022 - Present</span>
                 </div>
-                <p class="text-content">
-                    Managed circulation and database operations for Stanford's Music Library. Assisted patrons with checkouts, returns, and locating materials using music-specific cataloging systems.
-                </p>
+                <p class="text-content">Managed circulation and database operations for Stanford's Music Library. Assisted patrons with checkouts, returns, and locating materials using music-specific cataloging systems.</p>
             </div>
-
             <div class="list-item">
                 <div class="list-header">
                     <h4 class="list-title">Yunus & Youth Fellowship Writer</h4>
                     <span class="list-location">Remote</span>
                     <span class="list-period">June 2024 – Dec 2024</span>
                 </div>
-                <p class="text-content">
-                    Worked closely with the writing team to craft compelling content for Muhammad Yunus's memoir, contributing to the development of a reflective narrative on his life's work and impact.
-                </p>
+                <p class="text-content">Worked closely with the writing team to craft compelling content for Muhammad Yunus's memoir, contributing to the development of a reflective narrative on his life's work and impact.</p>
             </div>
-
             <div class="list-item">
                 <div class="list-header">
                     <h4 class="list-title">Warner Bros. Pictures Digital Marketing Intern</h4>
                     <span class="list-location">Burbank, CA</span>
                     <span class="list-period">Summer 2022, 2023</span>
                 </div>
-                <p class="text-content">
-                    Increased TikTok followers on @warnerbrostv by 22% through strategic content creation. Management for WB entities' social media accounts. Overall management of 100+ accounts, with a focus on 6.
-                </p>
+                <p class="text-content">Increased TikTok followers on @warnerbrostv by 22% through strategic content creation. Management for WB entities' social media accounts. Overall management of 100+ accounts, with a focus on 6.</p>
             </div>
         </div>
     </section>
 
     <section id="accomplishments" class="section">
         <h2 class="section-title">Accomplishments</h2>
-        
-        <div class="card">
-            <h3 class="card-title">Leadership & Activities</h3>
-            
-            <div class="list-item">
-                <div class="list-header">
-                    <h4 class="list-title">Stanford Concert Network</h4>
-                    <span class="list-location">Stanford, CA</span>
-                    <span class="list-period">Sept 2021 - Mar 2022</span>
+        <div class="grid-2">
+            <div class="card">
+                <h3 class="card-title card-title--lg">Leadership & Activities</h3>
+                <div class="list-item">
+                    <div class="list-header">
+                        <h4 class="list-title">Stanford Concert Network</h4>
+                        <span class="list-period">Sept 2021 - Mar 2022</span>
+                    </div>
+                    <p class="text-content">Successfully negotiated contracts with venues and an artist's management team to organize SCN's New Member Showcase concerts with a $2500 budget.</p>
                 </div>
-                <p class="text-content">
-                    Successfully negotiated contracts with venues and an artist's management team to organize SCN's New Member Showcase concerts with a $2500 budget.
-                </p>
+                <div class="list-item">
+                    <div class="list-header">
+                        <h4 class="list-title">Live Sound Technician</h4>
+                        <span class="list-period">Jul 2021 - Jan 2022</span>
+                    </div>
+                    <p class="text-content">Live mixing of drums, keyboard, guitars, bass, and vocals. Set up and operation of audio equipment (mics, 32 input Yamaha live mixer, etc.) at Vineyard of Hope Church, Walnut, CA.</p>
+                </div>
+                <div class="list-item">
+                    <div class="list-header">
+                        <h4 class="list-title">Stanford Sigma Chi Alpha Omega Chapter</h4>
+                        <span class="list-period">Sept 2022 - Present</span>
+                    </div>
+                    <p class="text-content">Historian: Responsible for collection and protection of the Chapter history through social media, scrapbooks, organized documentation and events.</p>
+                </div>
             </div>
-
-            <div class="list-item">
-                <div class="list-header">
-                    <h4 class="list-title">Live Sound Technician</h4>
-                    <span class="list-location">Vineyard of Hope Church | Walnut, CA</span>
-                    <span class="list-period">Jul 2021 - Jan 2022</span>
-                </div>
-                <p class="text-content">
-                    Live mixing of drums, keyboard, guitars, bass, and vocals. Set up and operation of audio equipment (mics, 32 input Yamaha live mixer, etc.)
-                </p>
-            </div>
-
-            <div class="list-item">
-                <div class="list-header">
-                    <h4 class="list-title">Stanford Sigma Chi Alpha Omega Chapter</h4>
-                    <span class="list-location">Stanford, CA</span>
-                    <span class="list-period">Sept 2022 - Present</span>
-                </div>
-                <p class="text-content">
-                    Historian: Responsible for collection and protection of the Chapter history through social media, scrapbooks, organized documentation and events.
-                </p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3 class="card-title">Honors & Awards</h3>
-            
-            <div class="awards-list">
-                <div class="award-item">
-                    <h4 class="award-title">2020 Elks Scholar - Most Valuable Student Scholarship</h4>
-                    <p class="award-description">Selected as a Most Valuable Student Scholar $4,000 Semi-Finalist Elks National Foundation Scholarship.</p>
-                </div>
-
-                <div class="award-item">
-                    <h4 class="award-title">2020 Coca-Cola Scholars Semifinalist</h4>
-                    <p class="award-description">1,928 students were selected from over 93,000 applicants from across the country to continue through the selection process.</p>
-                </div>
-
-                <div class="award-item">
-                    <h4 class="award-title">2019 826 National's Poets in Revolt</h4>
-                    <p class="award-description">Poet for anthology created with Amanda Gorman and Kate Deciccio.</p>
-                </div>
-
-                <div class="award-item">
-                    <h4 class="award-title">2019 14th Eugene O'Neill Theater Center Young Playwrights Festival Semifinalist</h4>
-                    <p class="award-description">Selected as semifinalist in national playwriting competition.</p>
-                </div>
-                
-                <div class="award-item">
-                    <h4 class="award-title">2018 National Student Poets Program Semifinalist</h4>
-                    <p class="award-description">1 of 35 semi-finalists chosen out of 23,000 poetry entries.</p>
-                </div>
-
-                <div class="award-item">
-                    <h4 class="award-title">2017 33rd California Young Playwrights Contest Semifinalist</h4>
-                    <p class="award-description">Chosen as a semi-finalist out of 432 playwriting submissions.</p>
+            <div class="card">
+                <h3 class="card-title card-title--lg">Honors & Awards</h3>
+                <div class="awards-list">
+                    <div class="award-item">
+                        <h4 class="award-title">2020 Elks Scholar - Most Valuable Student Scholarship</h4>
+                        <p class="award-description">Selected as a Most Valuable Student Scholar $4,000 Semi-Finalist Elks National Foundation Scholarship.</p>
+                    </div>
+                    <div class="award-item">
+                        <h4 class="award-title">2020 Coca-Cola Scholars Semifinalist</h4>
+                        <p class="award-description">1,928 students were selected from over 93,000 applicants from across the country.</p>
+                    </div>
+                    <div class="award-item">
+                        <h4 class="award-title">2019 826 National's Poets in Revolt</h4>
+                        <p class="award-description">Poet for anthology created with Amanda Gorman and Kate Deciccio.</p>
+                    </div>
+                    <div class="award-item">
+                        <h4 class="award-title">2019 Eugene O'Neill Young Playwrights Semifinalist</h4>
+                        <p class="award-description">Selected as semifinalist in national playwriting competition.</p>
+                    </div>
+                    <div class="award-item">
+                        <h4 class="award-title">2018 National Student Poets Program Semifinalist</h4>
+                        <p class="award-description">1 of 35 semi-finalists chosen out of 23,000 poetry entries.</p>
+                    </div>
+                    <div class="award-item">
+                        <h4 class="award-title">2017 California Young Playwrights Semifinalist</h4>
+                        <p class="award-description">Chosen as a semi-finalist out of 432 playwriting submissions.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1207,27 +666,19 @@
         <h2 class="section-title">Get in Touch</h2>
         <div class="contact-links">
             <a href="/cdn-cgi/l/email-protection#8ce6e9fee9e1f5e6e4ccede0f9e1e2e5a2fff8ede2eae3fee8a2e9e8f9" class="contact-link">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
+                <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 Email
             </a>
             <a href="https://github.com/jerhsiao" class="contact-link" target="_blank">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
+                <svg class="contact-icon" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 GitHub
             </a>
             <a href="https://www.linkedin.com/in/jeremy-hsiao" class="contact-link" target="_blank">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
+                <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 LinkedIn
             </a>
             <a href="jeremy-hsiao-resume.pdf" class="contact-link" target="_blank" download>
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-                </svg>
+                <svg class="contact-icon" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>g
                 Resume
             </a>
         </div>
@@ -1235,79 +686,26 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        // Course data for tooltips
         const courseData = {
-            "Quantum Computer Music": {
-                skills: ["ChucK", "Python", "Qiskit", "SciPy", "Quantum Computing"],
-                description: "Developed quantum computing applications for music generation using quantum circuits, algorithms, and audio signal processing."
-            },
-            "Programming Abstractions": {
-                skills: ["C++", "Data Structures", "OOP", "Algorithms", "GitHub"],
-                description: "Mastered fundamental data structures, object-oriented programming, and algorithmic thinking in C++."
-            },
-            "Computer Organization and Systems": {
-                skills: ["C", "Assembly", "Memory Management", "Performance Optimization"],
-                description: "Explored low-level computer systems, from C programming to microprocessor architecture and memory organization."
-            },
-            "Data Science for Social Problems": {
-                skills: ["R", "Python", "Causal Inference", "Machine Learning", "Ethics"],
-                description: "Applied statistical methods and machine learning to real-world social challenges in healthcare, education, and energy."
-            },
-            "Computer Graphics and Imaging": {
-                skills: ["3D Graphics", "Ray Tracing", "Linear Algebra", "Shading"],
-                description: "Built understanding of 3D rendering, lighting models, and image synthesis techniques."
-            },
-            "Mathematical Foundations of Computing": {
-                skills: ["Discrete Math", "Complexity Theory", "Formal Logic", "Proofs"],
-                description: "Studied theoretical limits of computation and mathematical reasoning in computer science."
-            },
-            "Probability for Computer Scientists": {
-                skills: ["Statistics", "Probability", "Combinatorics", "Algorithm Analysis"],
-                description: "Applied probability theory to machine learning and algorithmic analysis."
-            },
-            "From Languages to Information": {
-                skills: ["NLP", "Machine Learning", "Text Processing", "Information Retrieval"],
-                description: "Built systems for extracting meaning from text, speech, and web data using computational linguistics."
-            },
-            "Sound Installation": {
-                skills: ["Spatial Audio", "Projection Mapping", "Installation Art", "Logic Pro X", "Sound Design", "MAX/MSP"],
-                description: "Created site-specific sound artworks exploring relationships between sound, space, and architecture."
-            },
-            "Audiovisual Performance": {
-                skills: ["Live Performance", "Video Synthesis", "Multimedia", "Real-time Processing"],
-                description: "Performed live audiovisual works combining music and video in experimental contexts."
-            },
-            "Sonification of Temporal Data": {
-                skills: ["Data Sonification", "Time-series Analysis", "Live Coding", "Ensemble Performance"],
-                description: "Transformed temporal datasets into musical performances through algorithmic composition techniques."
-            },
-            "Sculpting with Sounds, Images, and Words": {
-                skills: ["Web Development", "Multimedia", "Interactive Media", "Logic Pro X", "Creative Coding"],
-                description: "Explored multimodal expression through creative web-based projects and interactive storytelling."
-            },
-            "Jazz History": {
-                skills: ["Music Analysis", "Cultural Studies", "Historical Research"],
-                description: "Studied evolution of jazz from bebop to contemporary styles and key artistic figures."
-            },
-            "Pitch Design": {
-                skills: ["Music Composition", "Harmonic Analysis", "Creative Process"],
-                description: "Developed compositional techniques and personal style through weekly pitch-based exercises."
-            },
-            "The Politics of Algorithms": {
-                skills: ["Critical Theory", "Algorithmic Bias", "Policy Analysis", "Ethics"],
-                description: "Analyzed social and political implications of algorithmic systems in contemporary society."
-            },
-            "Media Psychology": {
-                skills: ["Cognitive Psychology", "Media Effects", "Research Methods", "Data Analysis"],
-                description: "Examined psychological processes in media consumption and human-computer interaction."
-            },
-            "Communication Research Methods": {
-                skills: ["Experimental Design", "Survey Research", "Content Analysis", "Statistical Analysis"],
-                description: "Designed and conducted quantitative communication research using various methodological approaches."
-            }
+            "Quantum Computer Music": { skills: ["ChucK", "Python", "Qiskit", "SciPy", "Quantum Computing"], description: "Developed quantum computing applications for music generation using quantum circuits, algorithms, and audio signal processing." },
+            "Programming Abstractions": { skills: ["C++", "Data Structures", "OOP", "Algorithms", "GitHub"], description: "Mastered fundamental data structures, object-oriented programming, and algorithmic thinking in C++." },
+            "Computer Organization and Systems": { skills: ["C", "Assembly", "Memory Management", "Performance Optimization"], description: "Explored low-level computer systems, from C programming to microprocessor architecture and memory organization." },
+            "Data Science for Social Problems": { skills: ["R", "Python", "Causal Inference", "Machine Learning", "Ethics"], description: "Applied statistical methods and machine learning to real-world social challenges in healthcare, education, and energy." },
+            "Computer Graphics and Imaging": { skills: ["3D Graphics", "Ray Tracing", "Linear Algebra", "Shading"], description: "Built understanding of 3D rendering, lighting models, and image synthesis techniques." },
+            "Mathematical Foundations of Computing": { skills: ["Discrete Math", "Complexity Theory", "Formal Logic", "Proofs"], description: "Studied theoretical limits of computation and mathematical reasoning in computer science." },
+            "Probability for Computer Scientists": { skills: ["Statistics", "Probability", "Combinatorics", "Algorithm Analysis"], description: "Applied probability theory to machine learning and algorithmic analysis." },
+            "From Languages to Information": { skills: ["NLP", "Machine Learning", "Text Processing", "Information Retrieval"], description: "Built systems for extracting meaning from text, speech, and web data using computational linguistics." },
+            "Sound Installation": { skills: ["Spatial Audio", "Projection Mapping", "Installation Art", "Logic Pro X", "Sound Design", "MAX/MSP"], description: "Created site-specific sound artworks exploring relationships between sound, space, and architecture." },
+            "Audiovisual Performance": { skills: ["Live Performance", "Video Synthesis", "Multimedia", "Real-time Processing"], description: "Performed live audiovisual works combining music and video in experimental contexts." },
+            "Sonification of Temporal Data": { skills: ["Data Sonification", "Time-series Analysis", "Live Coding", "Ensemble Performance"], description: "Transformed temporal datasets into musical performances through algorithmic composition techniques." },
+            "Sculpting with Sounds, Images, and Words": { skills: ["Web Development", "Multimedia", "Interactive Media", "Logic Pro X", "Creative Coding"], description: "Explored multimodal expression through creative web-based projects and interactive storytelling." },
+            "Jazz History": { skills: ["Music Analysis", "Cultural Studies", "Historical Research"], description: "Studied evolution of jazz from bebop to contemporary styles and key artistic figures." },
+            "Pitch Design": { skills: ["Music Composition", "Harmonic Analysis", "Creative Process"], description: "Developed compositional techniques and personal style through weekly pitch-based exercises." },
+            "The Politics of Algorithms": { skills: ["Critical Theory", "Algorithmic Bias", "Policy Analysis", "Ethics"], description: "Analyzed social and political implications of algorithmic systems in contemporary society." },
+            "Media Psychology": { skills: ["Cognitive Psychology", "Media Effects", "Research Methods", "Data Analysis"], description: "Examined psychological processes in media consumption and human-computer interaction." },
+            "Communication Research Methods": { skills: ["Experimental Design", "Survey Research", "Content Analysis", "Statistical Analysis"], description: "Designed and conducted quantitative communication research using various methodological approaches." }
         };
 
-        // Populate coursework grid
         const courseworkGrid = document.getElementById('coursework-grid');
         Object.keys(courseData).forEach(course => {
             const courseTag = document.createElement('div');
@@ -1318,7 +716,6 @@
             courseworkGrid.appendChild(courseTag);
         });
 
-        // Tooltip handling
         const tooltip = document.getElementById('course-tooltip');
         const tooltipTitle = document.getElementById('tooltip-title');
         const tooltipSkills = document.getElementById('tooltip-skills');
@@ -1327,10 +724,8 @@
         function handleCourseHover(course, event) {
             const rect = event.currentTarget.getBoundingClientRect();
             const data = courseData[course];
-            
             tooltipTitle.textContent = course;
             tooltipDescription.textContent = data.description;
-            
             tooltipSkills.innerHTML = '';
             data.skills.forEach(skill => {
                 const skillSpan = document.createElement('span');
@@ -1338,112 +733,64 @@
                 skillSpan.textContent = skill;
                 tooltipSkills.appendChild(skillSpan);
             });
-
-            // Position tooltip - check if it fits on the right
             let left = rect.right + 10;
-            if (left + 320 > window.innerWidth) {
-                left = rect.left - 330;
-            }
+            if (left + 320 > window.innerWidth) left = rect.left - 330;
             if (left < 10) left = 10;
-
             tooltip.style.left = left + 'px';
             tooltip.style.top = Math.max(10, rect.top) + 'px';
             tooltip.style.display = 'block';
         }
 
-        function handleCourseLeave() {
-            tooltip.style.display = 'none';
-        }
+        function handleCourseLeave() { tooltip.style.display = 'none'; }
 
-        // Mobile nav toggle
         const navToggle = document.querySelector('.nav-toggle');
         const navList = document.querySelector('.nav-list');
+        navToggle.addEventListener('click', () => { navToggle.classList.toggle('active'); navList.classList.toggle('active'); });
 
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navList.classList.toggle('active');
-        });
-
-        // Close mobile nav when clicking a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 navToggle.classList.remove('active');
                 navList.classList.remove('active');
-                
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                const targetSection = document.querySelector(this.getAttribute('href'));
+                if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Active section highlighting
         function updateActiveSection() {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
-            
             let current = '';
             const scrollPosition = window.scrollY + 200;
-            
             sections.forEach(section => {
                 const sectionTop = section.getBoundingClientRect().top + window.scrollY;
                 const sectionHeight = section.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) current = section.getAttribute('id');
             });
-            
-            // Contact section near bottom
             const contactSection = document.querySelector('#contact');
             if (contactSection) {
                 const contactTop = contactSection.getBoundingClientRect().top + window.scrollY;
-                const documentHeight = document.documentElement.scrollHeight;
-                const windowHeight = window.innerHeight;
-                const scrollBottom = window.scrollY + windowHeight;
-                
-                if (scrollBottom >= documentHeight - 200 || scrollPosition >= contactTop) {
-                    current = 'contact';
-                }
+                const scrollBottom = window.scrollY + window.innerHeight;
+                if (scrollBottom >= document.documentElement.scrollHeight - 200 || scrollPosition >= contactTop) current = 'contact';
             }
-            
             if (window.scrollY < 100) current = '';
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+            navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === '#' + current) link.classList.add('active'); });
         }
 
         window.addEventListener('scroll', updateActiveSection);
         updateActiveSection();
+        window.addEventListener('scroll', function() { document.querySelector('.scroll-indicator').style.opacity = window.scrollY > 100 ? '0' : '1'; });
 
-        // Scroll indicator fade
-        window.addEventListener('scroll', function() {
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            scrollIndicator.style.opacity = window.scrollY > 100 ? '0' : '1';
-        });
-
-        // Intersection observer for fade-in animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        function toggleCollapsible(header) { header.classList.toggle('open'); header.nextElementSibling.classList.toggle('open'); }
 
         const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.research-card, .project-card, .education-card, .card').forEach(card => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(card);
         });
     </script>
